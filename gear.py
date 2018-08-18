@@ -5,6 +5,12 @@ def main():
         print(randharm())
         print(randrange())
 
+        for n in [1.0, 0.85, 0.42, 0.4, 0.4, 0.4]:
+                if random() <= n:
+                        print("tag")
+                else:
+                        break
+
 def randharm():
         return "Harm " + str(randint(1,3))
 
