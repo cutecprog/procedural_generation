@@ -3,7 +3,7 @@ from random import randint, random
 def main():
         print("The person is")
 
-        for i in range(0, randint(3, 8)):
+        for i in range(0, randint(3, 5)):
                 n = random()
                 if n <= positive["chance"]:
                         print(positive["traits"][randint(0, positive["size"])])
