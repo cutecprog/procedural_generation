@@ -39,7 +39,8 @@ tags = ["automatic", "area", "balanced", "fire", "healing", "heavy", "holy", \
                 "many", "[a material]", "messy", "quick", "reload", "slow", \
                 "small", "unreliable", "useful", "valuable", "volatile"]
 
-materials = ["wood", "silver", "copper", "iron", "polycarbon", "bone"]
+materials = ["wood", "silver alloy", "copper alloy", "iron alloy", \
+                "polycarbon", "bone"]
 
 if __name__ == "__main__":
         # execute only if run as a script
