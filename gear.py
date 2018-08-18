@@ -19,7 +19,8 @@ def main():
                         elif tag == "slow":
                                 tags.remove("quick")
                         elif tag == "[a material]":
-                                tag = shuffle(materials)[0]
+                                shuffle(materials)
+                                tag = materials.pop()
                         print(tag)
                 else:
                         break
