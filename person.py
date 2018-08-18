@@ -1,5 +1,10 @@
+from random import randint, random
+
 def main():
         print("The person is")
+        print(randint(0,200))
+        print(random())
+        
 
 positive = (234, 0.37, """""")
 neutral  = (292, 0.18, """""")
