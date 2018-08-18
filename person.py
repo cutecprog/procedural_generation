@@ -5,8 +5,14 @@ def main():
         print(randint(0, 200))
         print(random())
         print(positive["chance"])
-        #for i in range(0, randint(3, 8)):
-        #        if positive[1]
+        for i in range(0, randint(3, 8)):
+                n = random()
+                if n <= positive["chance"]:
+                        print("+")
+                elif n > 1 - negative["chance"]:
+                        print("-")
+                else:
+                        print("n")
 
 
 positive = {"size": 234, "chance": 0.37, "traits": """"""}
