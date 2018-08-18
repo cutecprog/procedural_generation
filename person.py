@@ -1,6 +1,8 @@
 from random import randint, random
 
 def main():
+        positive["traits"] = positive["traits"].split('\n')
+        print(positive["traits"])
         print("The person is")
         print(randint(0, 200))
         print(random())
@@ -653,7 +655,6 @@ Well-meaning
 Willful
 Wishful
 Zany"""}
-
 
 if __name__ == "__main__":
         # execute only if run as a script
