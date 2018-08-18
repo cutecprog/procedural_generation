@@ -1,17 +1,19 @@
 from random import randint, random
 
 def main():
-        print(positive["traits"])
         print("The person is")
+        print(len(positive["traits"]))
+        print(len(negative["traits"]))
+        print(len(neutral["traits"]))
 
         for i in range(0, randint(3, 8)):
                 n = random()
                 if n <= positive["chance"]:
-                        print("+")
+                        print(positive["traits"][randint(0, positive["size"])])
                 elif n > 1 - negative["chance"]:
-                        print("-")
+                        print(negative["traits"][randint(0, negative["size"])])
                 else:
-                        print("n")
+                        print(neutral["traits"][randint(0, neutral["size"])])
 
 
 positive = {"size": 234, "chance": 0.37, "traits": """Accessible
@@ -248,7 +250,7 @@ Winning
 Wise
 Witty
 Youthful"""}
-neutral  = {"size": 292, "chance": 0.18, "traits": """Absentminded
+neutral  = {"size": 112, "chance": 0.18, "traits": """Absentminded
 Aggressive
 Ambitious
 Amusing
