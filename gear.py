@@ -5,6 +5,9 @@ def main():
         print(randharm())
         print(randrange())
 
+        if random() <= 0.15:
+                print("magic")
+
         shuffle(tags)
         for n in [1.0, 0.85, 0.42, 0.4, 0.4, 0.4]:
                 if random() <= n:
@@ -32,7 +35,7 @@ def randrange():
         return ["hand", "close", "far"][randint(0,2)]
 
 tags = ["automatic", "area", "balanced", "fire", "healing", "heavy", "holy", \
-                "ignore-armour", "innocuous", "intimate", "loud", "magic", \
+                "ignore-armour", "innocuous", "intimate", "loud", \
                 "many", "[a material]", "messy", "quick", "reload", "slow", \
                 "small", "unreliable", "useful", "valuable", "volatile"]
 
