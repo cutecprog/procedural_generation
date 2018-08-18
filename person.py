@@ -2,9 +2,6 @@ from random import randint, random
 
 def main():
         print("The person is")
-        print(len(positive["traits"]))
-        print(len(negative["traits"]))
-        print(len(neutral["traits"]))
 
         for i in range(0, randint(3, 8)):
                 n = random()
