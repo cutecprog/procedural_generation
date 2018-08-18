@@ -8,10 +8,10 @@ def main():
         shuffle(tags)
         for n in [1.0, 0.85, 0.42, 0.4, 0.4, 0.4]:
                 if random() <= n:
-                        tag = tags.pop()
+                        tag = "automatic"#tags.pop()
                         if tag == "automatic":
                                 # Automatic tag 90% has reload tag
-                                if random() <= 0.9 and "reload" in tags:
+                                if random() <= 0.7 and "reload" in tags:
                                         tags.remove("reload")
                                         print("reload")
                         elif tag == "quick":
