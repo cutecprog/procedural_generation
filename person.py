@@ -1,12 +1,9 @@
 from random import randint, random
 
 def main():
-        positive["traits"] = positive["traits"].split('\n')
         print(positive["traits"])
         print("The person is")
-        print(randint(0, 200))
-        print(random())
-        print(positive["chance"])
+
         for i in range(0, randint(3, 8)):
                 n = random()
                 if n <= positive["chance"]:
@@ -655,6 +652,10 @@ Well-meaning
 Willful
 Wishful
 Zany"""}
+
+positive["traits"] = positive["traits"].split('\n')
+neutral["traits"] = neutral["traits"].split('\n')
+negative["traits"] = negative["traits"].split('\n')
 
 if __name__ == "__main__":
         # execute only if run as a script
