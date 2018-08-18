@@ -2,6 +2,10 @@ from random import randint, random
 
 def main():
         print("The person is")
+        if random() > 0.5:
+                print("Male")
+        else:
+                print("Female")
 
         for i in range(0, randint(3, 5)):
                 n = random()
