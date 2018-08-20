@@ -20,12 +20,16 @@ class Flora(object):
         roll = random()
         if roll <= 0.3:
             self.type = "Woody"
+            self._woody()
         elif roll <= 0.85:
             self.type = "Herbaceous"
+            self._herb()
         elif roll <= 0.90:
             self.type = "Algae"
+            self._algae()
         else:
             self.type = "Fungus"
+            self._fungus()
 
         self.habitat = {}
         self.grouping = {}
@@ -36,6 +40,31 @@ class Flora(object):
         self.diet = {}
         self.sentience = {}
         self.edibility = {}
+
+    def _woody(self):
+        roll = random() - 5 * gravity
+        print("w")
+
+    def _herb(self):
+        print("h")
+
+    def _algae(self):
+        print("a")
+
+    def _fungus(self):
+        print("f")
+
+    def generate(self):
+        if self.type == "Woody":
+            self._woody()
+        elif self.type == "Herbaceous":
+            self._herb()
+        elif self.type == "Algae":
+            self._algae()
+        elif self.type == "Fungus":
+            self._fungus()
+        else:
+            print("Error: type attribute is not valid")
 
 if __name__ == "__main__":
     # execute only if run as a script
