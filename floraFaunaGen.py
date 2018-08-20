@@ -54,18 +54,6 @@ class Flora(object):
     def _fungus(self):
         print("f")
 
-    def generate(self):
-        if self.type == "Woody":
-            self._woody()
-        elif self.type == "Herbaceous":
-            self._herb()
-        elif self.type == "Algae":
-            self._algae()
-        elif self.type == "Fungus":
-            self._fungus()
-        else:
-            print("Error: type attribute is not valid")
-
 if __name__ == "__main__":
     # execute only if run as a script
     main()
