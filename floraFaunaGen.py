@@ -7,10 +7,8 @@ from random import random
 def main():
     flora = Flora()
     print("The flora is")
+    print("{:>12}: ".format("Type") + flora.type)
     print(vars(flora))
-    for name in table_names: 
-        print("{:>12}: ".format(name))
-        
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
