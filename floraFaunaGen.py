@@ -5,20 +5,30 @@ Tables by Sebastian Romu
 from random import random
 
 def main():
+    flora = Flora()
     print("The flora is")
-    print(vars(flora()))
-    for name in table_names:
+    print(vars(flora))
+    for name in table_names: 
         print("{:>12}: ".format(name))
         
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
-table_names = ["Type", "Habitat", "Grouping", "Size", "Body", "Leaves", \
-                "Reproduction", "Diet", "Sentience", "Edibility"]
+table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
+                "reproduction", "diet", "sentience", "edibility"]
 
-class flora(object):
+class Flora(object):
     def __init__(self):
-        self.type = ""
+        roll = random()
+        if roll <= 0.3:
+            self.type = "Woody"
+        elif roll <= 0.85:
+            self.type = "Herbaceous"
+        elif roll <= 0.90:
+            self.type = "Algae"
+        else:
+            self.type = "Fungus"
+
         self.habitat = {}
         self.grouping = {}
         self.size = {}
