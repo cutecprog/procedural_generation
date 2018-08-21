@@ -184,6 +184,12 @@ class Flora(object):
         else:
             self.body["main"] = {self.body["main"]: select(random(), \
                     body_surface_table[self.type])}
+        if self.body["branches"] != "None":
+            self.body["branches"] = {self.body["branches"]: select(random(), \
+                    body_surface_table[self.type])}
+        if self.body["roots"] != "None":
+            self.body["roots"] = {self.body["roots"]: select(random(), \
+                    body_surface_table[self.type])}
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
