@@ -31,6 +31,17 @@ def add_without_repeat(tag, additional_tag):
         # both rolled subhabitats aren't the same
         return [tag, additional_tag]
     return tag
+
+def roll_twice(type, table):
+    output = ["Roll Twice", "Roll Twice"]
+    # Reroll if land on roll twice
+    while output[0] == "Roll Twice":
+        output[0] = select(random(), body_table2[type])
+    while output[1] == "Roll Twice" or output[1] == output[0]:
+        output[1] = select(random(), body_table2[type])
+    return output
+
+
 # Table 1
 type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
 # Table 2
@@ -70,7 +81,9 @@ size_table = {"Woody":
         "Fungus":
         {"Huge": 0.01, "Large": 0.10, "Average": 0.30, "Small": 0.60, "Tiny": 1} }
 # Table 5
-body_table = {"Woody":
+body_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
+        "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
+body_table2 = {"Woody":
         {"Colonial Mass": 0.02, "Creeper / Vine": 0.20, "Stem / Trunk": 0.70, 
         "Multiple Stems / Trunks": 0.99, "Roll Twice": 1},
         "Herbaceous":
@@ -125,6 +138,8 @@ class Flora(object):
         self.size = select(random(), size_table[self.type])
         self.body = {}
         self.body["main"] = select(random(), body_table[self.type])
+        if self.body["main"] == "Roll Twice":
+            self.body["main"] = roll_twice(self.type, body_table)
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
