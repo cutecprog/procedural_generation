@@ -58,7 +58,7 @@ def roll_twice(table):
 #------------------------------ Tables ----------------------------------------
 
 # Table 1
-type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
+type_table = {"Woody": 0.0, "Herbaceous": 0.5, "Algae": 0.90, "Fungus": 1}
 # Table 2
 habitat_table = {"Woody":
         {"Aquatic": 0.05, "Sub-Terrestrial": 0.10, "Terrestrial": 0.99, "Avian": 1},
@@ -158,7 +158,7 @@ leaves_table = {"Woody":
         "Scales": 0.98, "Roll Twice": 0.99, "None": 1},
         "Algae":
         {"Broad": 0.02, "Needles": 0.03, "Compound": 0.10, "Blades": 0.11,
-        "Scales": 0.15, "Roll Twice": 0.30, "None": 1},
+        "Scales": 0.15, "Roll Twice": 0.99, "None": 1},
         "Fungus":
         {"Broad": 0.25, "Needles": 0.50, "Compound": 0.60, "Blades": 0.80,
         "Scales": 0.90, "Roll Twice": 0.95, "None": 1} }
@@ -167,15 +167,75 @@ leaf_location_table = {"Terminal": 0.30, "Branch Points": 0.50,
         "Random Interval": 0.70, "Regular Interval": 0.90,
         "Stem / Trunk": 0.98, "Roll Twice": 1}
 # Table 6b
-leaf_shape = {}
+leaf_shape = {"Acicular": 0.03, "Subulate": 0.06, "Lanceolate": 0.10,
+        "Linear": 0.14, "Falcate": 0.17, "Spear-Shaped": 0.21, "Hastate": 0.25,
+        "Deltoid": 0.28, "Rhomboid": 0.32, "Cuneate": 0.35, "Cordate": 0.39,
+        "Obcordate": 0.43, "Ovate": 0.47, "Obovate": 0.51, "Acuminate": 0.56,
+        "Aristate": 0.58, "Orbicular": 0.61, "Obtuse": 0.64, "Elliptic": 0.67,
+        "Reniform": 0.70, "Spatulate": 0.72, "Truncate": 0.75,
+        "Flabellate": 0.78, "Lobed": 0.81, "Pinnatisect": 0.83,
+        "Poly-Foliate": 0.87, "Palmate": 0.92, "Pedate": 0.96, "Digitate": 0.98,
+        "Roll Twice": 1}
 
-leaf_margin = {}
+leaf_margin = {"Smooth": 0.15, "Sinuate": 0.30, "Undulate": 0.40, "Spiny": 0.45,
+        "Lobate": 0.55, "Crenate": 0.60, "Dentate": 0.70, "Denticulate": 0.75,
+        "Serate": 0.85, "Serrulate": 0.90, "Ciliate": 0.95, "Roll Twice": 1}
 # Table 6c
 # Table 6d
 # Table 6e
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 test_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
         "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
+
+'''
+Acicular (Needle-shaped) 56-58 Aristate (With spine-like
+tip)
+1-15 Smooth
+4-6 Subulate (Awl shaped) 59-61 Orbicular (Circular) 16-30 Sinuate
+7-10 Lanceolate (Pointed at both
+ends)
+62-64 Obtuse (Bluntly tipped) 31-40 Undulate
+11-14 Linear (Parallel margins,
+elongate)
+65-67 Elliptic (Oval-shaped, small
+or no point)
+41-45 Spiny
+15-17 Falcate (Sickle-shaped) 68-70 Reniform (Kidney-shaped) 46-55 Lobate
+18-21 Spear-Shaped (Pointed
+barbed base)
+70-72 Spatulate (Spoon shaped) 56-60 Crenate
+22-25 Hastate (Triangular with
+basal lobes)
+73-75 Truncate (Squared off
+apex)
+61-70 Dentate
+26-28 Deltoid (Triangular) 76-78 Flabellate (Fan-shaped) 71-75 Denticulate
+29-32 Rhomboid (Diamond-shaped) 79-81 Lobed (Deeply indented
+margins)
+76-85 Serate
+33-35 Cuneate (Wedge-shaped,
+accute base)
+82-83 Pinnatisect (Deep opposite
+lobing)
+86-90 Serrulate
+36-39 Cordate (Heart shaped, stem
+in cleft)
+84-87 Poly-Foliate (2-7 leaflets) 91-95 Ciliate
+40-43 Obcordate (Heart-shaped,
+stem at point)
+88-92 Palmate (Hand-like) 96-100 Re-Roll
+Twice**
+44-47 Ovate (Egg-shaped, wide at
+base)
+93-96 Pedate (Palmate divided
+lateral lobes)
+48-51 Obovate (Egg-shaped,
+narrow at base)
+97-98 Digitate (Finger-like lobes)
+52-56 Acuminate (Taper to long
+point)
+99-100 Re-Roll Twice*
+'''
 
 #----------------------- Classes ----------------------------------------------
 
@@ -260,14 +320,27 @@ class Flora(object):
 
     def _generate_leaves(self):
         self.leaves["type"] = select(random(), leaves_table[self.type])
-        if self.leaves["type"] == "None":
+        if type(self.leaves["type"]) is list:
+            self.leaves = [{"type": self.leaves["type"][0]}, \
+                    {"type": self.leaves["type"][1]} ]
+        elif self.leaves["type"] == "None":
             return
-        # Table 6a
-        if self.type == "Fungus":
-            self.leaves["location"] = "Terminal"
+        # Tables 6a+
+        if type(self.leaves) is list:
+            self.leaves[0] = self.__get_random_leaf_of_type(self.leaves[0]["type"])
+            self.leaves[1] = self.__get_random_leaf_of_type(self.leaves[1]["type"])
         else:
-            self.leaves["location"] = select(random(), leaf_location_table)
+            self.leaves = self.__get_random_leaf_of_type(self.leaves["type"])
+
+    def __get_random_leaf_of_type(self, type):
+        leaf = {"type": type}
+        # Table 6a
+        if type == "Fungus":
+            leaf["location"] = "Terminal"
+        else:
+            leaf["location"] = select(random(), leaf_location_table)
         # Table 6b
+        return leaf
 
 if __name__ == "__main__":
     # execute only if run as a script
