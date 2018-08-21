@@ -1,5 +1,5 @@
 """
-Tables by Sebastian Romu
+Tables (v1.1) by Sebastian Romu
 
 """
 from random import random
@@ -103,6 +103,18 @@ branches_table = {"Woody":
         "Fungus":
         {"Radial": 0.02, "Ordered": 0.05, "Random": 0.15, "None": 1} }
 # Table 5b
+roots_table = {"Woody":
+        {"Tap": 0.35, "Tubers": 0.37, "Fibrous": 0.84, "Advantageous": 0.93,
+        "Bulb": 0.95, "Rhizoid": 0.99, "None": 1},
+        "Herbaceous":
+        {"Tap": 0.35, "Tubers": 0.45, "Fibrous": 0.73, "Advantageous": 0.77,
+        "Bulb": 0.90, "Rhizoid": 0.99, "None": 1},
+        "Algae":
+        {"Tap": 0.01, "Tubers": 0.02, "Fibrous": 0.04, "Advantageous": 0.15,
+        "Bulb": 0.19, "Rhizoid": 0.50, "None": 1},
+        "Fungus":
+        {"Tap": 0.03, "Tubers": 0.09, "Fibrous": 0.15, "Advantageous": 0.20,
+        "Bulb": 0.30, "Rhizoid": 0.90, "None": 1} }
 # Table 5c
 # Table 5d
 # Table 6
@@ -149,6 +161,7 @@ class Flora(object):
         if self.body["main"] == "Roll Twice":
             self.body["main"] = roll_twice(self.type, body_table)
         self.body["branches"] = select(random(), branches_table[self.type])
+        self.body["roots"] = select(random(), roots_table[self.type])
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
