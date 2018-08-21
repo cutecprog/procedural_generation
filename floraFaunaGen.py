@@ -17,6 +17,7 @@ def main():
     print("{:>12}: ".format("Main Body") + str(flora.body["main"]))
     print("{:>12}: ".format("Branches") + str(flora.body["branches"]))
     print("{:>12}: ".format("Roots") + str(flora.body["roots"]))
+    print("{:>12}: ".format("Leaves") + str(flora.leaves["type"]))
     #pprint(vars(flora))
 
 gravity = 0     # Planetary Gravity Index
@@ -141,7 +142,19 @@ color_table = {"Red": 0.05, "Orange": 0.10, "Yellow": 0.20, "Green": 0.45,
 pattern_table = {"Spotted": 0.10, "Mottled": 0.20, "Patches": 0.25,
         "Stripes": 0.25, "Solid": 0.60, "Phases": 0.75, "Translucent": 0.80,
         "Iridescent": 0.85, "Luminescent": 0.90, "Blushed": 0.95, "Roll Twice": 1}
-# Table 6d
+# Table 6
+leaves_table = {"Woody":
+        {"Broad": 0.55, "Needles": 0.70, "Compound": 0.94, "Blades": 0.97,
+        "Scales": 0.98, "Roll Twice": 0.99, "None": 1},
+        "Herbaceous":
+        {"Broad": 0.45, "Needles": 0.50, "Compound": 0.85, "Blades": 0.97,
+        "Scales": 0.98, "Roll Twice": 0.99, "None": 1},
+        "Algae":
+        {"Broad": 0.02, "Needles": 0.03, "Compound": 0.10, "Blades": 0.11,
+        "Scales": 0.15, "Roll Twice": 0.30, "None": 1},
+        "Fungus":
+        {"Broad": 0.25, "Needles": 0.50, "Compound": 0.60, "Blades": 0.80,
+        "Scales": 0.90, "Roll Twice": 0.95, "None": 1} }
 # Table 6a
 # Table 6b
 # Table 6c
@@ -167,14 +180,16 @@ class Flora(object):
     def generate(self):
         # Table 1
         self.type = select(random(), type_table)
-        # Table 2
+        # Table 2*
         self._generate_habitat()
         # Table 3
         self.grouping = select(random(), grouping_table[self.type])
         # Table 4
         self.size = select(random(), size_table[self.type])
-        # Table 5
+        # Table 5*
         self._generate_body()
+        # Table 6
+        self.leaves["type"] = select(random(), leaves_table[self.type])
 
     def _generate_habitat(self):
         # Table 2
