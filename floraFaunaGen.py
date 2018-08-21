@@ -18,8 +18,8 @@ def main():
     print("{:>16}: ".format("Main Body") + str(flora.body["main"]))
     print("{:>16}: ".format("Branches") + str(flora.body["branches"]))
     print("{:>16}: ".format("Roots") + str(flora.body["roots"]))
-    print("{:>16}: ".format("Leaves") + str(flora.leaves["type"]))
-    print("{:>16}: ".format("Leaf Location") + str(flora.leaves["location"]))
+    print("{:>16}: ".format("Leaves") + str(flora.leaves))
+    #print("{:>16}: ".format("Leaf Location") + str(flora.leaves["location"]))
     #pprint(vars(flora))
 
 #----------------------- Globals ----------------------------------------------
@@ -163,7 +163,7 @@ leaves_table = {"Woody":
         {"Broad": 0.25, "Needles": 0.50, "Compound": 0.60, "Blades": 0.80,
         "Scales": 0.90, "Roll Twice": 0.95, "None": 1} }
 # Table 6a
-leaf_location_table = { "Terminal": 0.30, "Branch Points": 0.50,
+leaf_location_table = {"Terminal": 0.30, "Branch Points": 0.50,
         "Random Interval": 0.70, "Regular Interval": 0.90,
         "Stem / Trunk": 0.98, "Roll Twice": 1}
 # Table 6b
@@ -200,11 +200,8 @@ class Flora(object):
         self.size = select(random(), size_table[self.type])
         # Table 5*
         self._generate_body()
-        # Table 6
-        self.leaves["type"] = select(random(), leaves_table[self.type])
-        if self.type != "Fungus":
-            # Table 6a
-            self.leaves["location"] = select(random(), leaf_location_table)
+        # Table 6*
+        self._generate_leaves()
 
     def _generate_habitat(self):
         # Table 2
@@ -267,6 +264,16 @@ class Flora(object):
         if type(self.body["roots"]) is list:
             self.body["roots"].append(select(random(), color_table) )
             self.body["roots"].append(select(random(), pattern_table) )
+
+    def _generate_leaves(self):
+        self.leaves["type"] = select(random(), leaves_table[self.type])
+        if self.leaves["type"] == "None":
+            return
+        # Table 6a
+        if self.type == "Fungus":
+            self.leaves["location"] = "Terminal"
+        else:
+            self.leaves["location"] = select(random(), leaf_location_table)
 
 if __name__ == "__main__":
     # execute only if run as a script
