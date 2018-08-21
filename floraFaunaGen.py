@@ -36,9 +36,9 @@ def roll_twice(type, table):
     output = ["Roll Twice", "Roll Twice"]
     # Reroll if land on roll twice
     while output[0] == "Roll Twice":
-        output[0] = select(random(), body_table2[type])
+        output[0] = select(random(), table[type])
     while output[1] == "Roll Twice" or output[1] == output[0]:
-        output[1] = select(random(), body_table2[type])
+        output[1] = select(random(), table[type])
     return output
 
 
@@ -139,7 +139,7 @@ class Flora(object):
         self.body = {}
         self.body["main"] = select(random(), body_table[self.type])
         if self.body["main"] == "Roll Twice":
-            self.body["main"] = roll_twice(self.type, body_table)
+            self.body["main"] = roll_twice(self.type, body_table2)
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
