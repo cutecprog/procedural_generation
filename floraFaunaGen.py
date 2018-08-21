@@ -24,6 +24,7 @@ def select(roll, weights):
             return tag
 
 type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
+
 habitat_table = {"Woody": \
         {"Aquatic": 0.05, "Sub-Terrestrial": 0.10, "Terrestrial": 0.99, "Avian": 1}, \
         "Herbaceous": \
@@ -33,10 +34,20 @@ habitat_table = {"Woody": \
         "Fungus": \
         {"Aquatic": 0.10, "Sub-Terrestrial": 0.40, "Terrestrial": 0.99, "Avian": 1} }
 
+subhabitat_table = {"Aquatic": \
+        {"Salt-Water": 0.30, "Fresh Water": 0.90, "Brackish": 1}, \
+        "Other": \
+        {"Desert / Waste": 0.10, "Plains / Savannah": 0.40, \
+        "Marsh / Swamp / Bog": 0.50, "Forest / Jungle": 0.80, \
+        "Hills / Scrub": 0.90, "Mountains": 0.95, "Tundra": 1} }
+
 class Flora(object):
     def __init__(self):
         self.type = select(random(), type_table)
         self.habitat = select(random() - 5 * gravity, habitat_table[self.type])
+        if self.habitat == "Aquatic":
+            self.habitat = {"primary": self.habitat, "sub": select(random(), \
+                    subhabitat_table["Aquatic"]) }
         self.grouping = {}
         self.size = {}
         self.body = {}
