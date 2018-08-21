@@ -116,6 +116,16 @@ roots_table = {"Woody":
         {"Tap": 0.03, "Tubers": 0.09, "Fibrous": 0.15, "Advantageous": 0.20,
         "Bulb": 0.30, "Rhizoid": 0.90, "None": 1} }
 # Table 5c
+body_surface_table = {"Woody":
+        {"Smooth": 0.30, "Waxy": 0.40, "Rough": 0.70, "Scaly": 0.84,
+        "Flaky": 0.97, "Other": 0.99, "Roll Twice": 1},
+        "Herbaceous":
+        {"Smooth": 0.59, "Waxy": 0.79, "Rough": 0.85, "Scaly": 0.90,
+        "Flaky": 0.94, "Other": 0.99, "Roll Twice": 1},
+        "Algae":
+        {"Smooth": 0.65, "Waxy": 0.70, "Rough": 0.75, "Scaly": 0.82,
+        "Flaky": 0.90, "Other": 0.99, "Roll Twice": 1} }
+body_surface_table["Fungus"] = body_surface_table["Algae"]
 # Table 5d
 # Table 6
 # Table 6a
@@ -156,12 +166,24 @@ class Flora(object):
         self.grouping = select(random(), grouping_table[self.type])
         # Table 4
         self.size = select(random(), size_table[self.type])
+        # Table 5
         self.body = {}
         self.body["main"] = select(random(), body_table[self.type])
         if self.body["main"] == "Roll Twice":
             self.body["main"] = roll_twice(self.type, body_table)
+        # Table 5a
         self.body["branches"] = select(random(), branches_table[self.type])
+        # Table 5b
         self.body["roots"] = select(random(), roots_table[self.type])
+        # Table 5c
+        if self.body["main"] is list:
+            self.body["main"][0] = {self.body["main"][0]: select(random(), \
+                    body_surface_table[self.type])}
+            self.body["main"][1] = {self.body["main"][1]: select(random(), \
+                    body_surface_table[self.type])}
+        else:
+            self.body["main"] = {self.body["main"]: select(random(), \
+                    body_surface_table[self.type])}
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
