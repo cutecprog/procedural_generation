@@ -48,6 +48,8 @@ class Flora(object):
         self.habitat["primary"] = select(random() - 5 * gravity, habitat_table[self.type])
         if self.habitat["primary"] == "Aquatic":
             self.habitat["sub"] =  select(random(), subhabitat_table["Aquatic"])
+        else:
+            self.habitat["sub"] =  select(random(), subhabitat_table["Other"])
 
         self.grouping = {}
         self.size = {}
