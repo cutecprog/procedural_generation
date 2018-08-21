@@ -167,6 +167,9 @@ leaf_location_table = {"Terminal": 0.30, "Branch Points": 0.50,
         "Random Interval": 0.70, "Regular Interval": 0.90,
         "Stem / Trunk": 0.98, "Roll Twice": 1}
 # Table 6b
+leaf_shape = {}
+
+leaf_margin = {}
 # Table 6c
 # Table 6d
 # Table 6e
@@ -267,16 +270,17 @@ class Flora(object):
 
     def _generate_leaves(self):
         self.leaves["type"] = select(random(), leaves_table[self.type])
-        if self.type == "Fungus":
-            self.leaves["type"] += " Cap Structure"
         if self.leaves["type"] == "None":
             return
+        if self.type == "Fungus":
+            self.leaves["type"] += " Cap Structure"
         # Table 6a
         if self.type == "Fungus":
             self.leaves["location"] = "Terminal"
         else:
             self.leaves["location"] = select(random(), leaf_location_table)
         # Table 6b
+        
 
 if __name__ == "__main__":
     # execute only if run as a script
