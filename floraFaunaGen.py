@@ -19,10 +19,12 @@ aura = 0        # Planetary Aura Index
 table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
         "reproduction", "diet", "sentience", "edibility"]
 
-def select(roll, weights):
-    for tag in sorted(weights, key=weights.get):
+def select(roll, table):
+    for tag in sorted(table, key=table.get):
         # sort table able by weights
-        if roll <= weights[tag]:
+        if roll <= table[tag]:
+            if tag == "Roll Twice":
+                return roll_twice(table)
             return tag
     print("Error: No value less than or equal to " + roll)
 
@@ -32,7 +34,7 @@ def add_without_repeat(tag, additional_tag):
         return [tag, additional_tag]
     return tag
 
-def roll_twice(type, table):
+def roll_twice(table):
     output = ["Roll Twice", "Roll Twice"]
     # Reroll if land on roll twice
     while output[0] == "Roll Twice":
@@ -169,8 +171,6 @@ class Flora(object):
         # Table 5
         self.body = {}
         self.body["main"] = select(random(), body_table[self.type])
-        if self.body["main"] == "Roll Twice":
-            self.body["main"] = roll_twice(self.type, body_table)
         # Table 5a
         self.body["branches"] = select(random(), branches_table[self.type])
         # Table 5b
