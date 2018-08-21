@@ -249,8 +249,8 @@ class Flora(object):
             self.body["branches"] = [self.body["branches"], select(random(), \
                     body_surface_table[self.type])]
         if self.body["roots"] != "None":
-            self.body["roots"] = [self.body["roots"], select(random(), \
-                    body_surface_table[self.type])]
+            self.body["roots"] = {"type": self.body["roots"], \
+                    "surface": select(random(), body_surface_table[self.type])}
         # Table 5d
         if self.body["main"][0] is list:
             # Is 2d list
@@ -264,9 +264,9 @@ class Flora(object):
         if type(self.body["branches"]) is list:
             self.body["branches"].append(select(random(), color_table) )
             self.body["branches"].append(select(random(), pattern_table) )
-        if type(self.body["roots"]) is list:
-            self.body["roots"].append(select(random(), color_table) )
-            self.body["roots"].append(select(random(), pattern_table) )
+        if self.body["roots"]["type"] != "None":
+            self.body["roots"]["color"] = select(random(), color_table) 
+            self.body["roots"]["pattern"] = select(random(), pattern_table) 
 
     def _generate_leaves(self):
         self.leaves["type"] = select(random(), leaves_table[self.type])
@@ -278,7 +278,6 @@ class Flora(object):
         else:
             self.leaves["location"] = select(random(), leaf_location_table)
         # Table 6b
-        
 
 if __name__ == "__main__":
     # execute only if run as a script
