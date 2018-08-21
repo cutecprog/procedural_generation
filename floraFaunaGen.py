@@ -130,6 +130,7 @@ body_surface_table = {"Woody":
         "Flaky": 0.90, "Other": 0.99, "Roll Twice": 1} }
 body_surface_table["Fungus"] = body_surface_table["Algae"]
 # Table 5d
+
 # Table 6
 # Table 6a
 # Table 6b
@@ -157,6 +158,16 @@ class Flora(object):
         # Table 1
         self.type = select(random(), type_table)
         # Table 2
+        self._generate_habitat()
+        # Table 3
+        self.grouping = select(random(), grouping_table[self.type])
+        # Table 4
+        self.size = select(random(), size_table[self.type])
+        # Table 5
+        self._generate_body()
+
+    def _generate_habitat(self):
+        # Table 2
         self.habitat["primary"] = select(random() - 5 * gravity, habitat_table[self.type])
         if self.habitat["primary"] == "Aquatic":
             # Table 2a
@@ -176,10 +187,8 @@ class Flora(object):
         else:
             self.habitat["sub"] = \
                     [self.habitat["sub"], select(random(), rarity_table)]
-        # Table 3
-        self.grouping = select(random(), grouping_table[self.type])
-        # Table 4
-        self.size = select(random(), size_table[self.type])
+
+    def _generate_body(self):
         # Table 5
         self.body["main"] = select(random(), body_table[self.type])
         # Table 5a
