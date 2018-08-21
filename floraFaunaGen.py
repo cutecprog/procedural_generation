@@ -20,11 +20,11 @@ aura = 0        # Planetary Aura Index
 table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
         "reproduction", "diet", "sentience", "edibility"]
 
-def select(roll, table):
+def select(roll, table, allow_row_twice=True):
     for tag in sorted(table, key=table.get):
         # sort table able by weights
         if roll <= table[tag]:
-            if tag == "Roll Twice":
+            if allow_row_twice and tag == "Roll Twice":
                 return roll_twice(table)
             return tag
     print("Error: No value less than or equal to " + roll)
@@ -39,9 +39,9 @@ def roll_twice(table):
     output = ["Roll Twice", "Roll Twice"]
     # Reroll if land on roll twice
     while output[0] == "Roll Twice":
-        output[0] = select(random(), table[type])
+        output[0] = select(random(), table, allow_row_twice=False)
     while output[1] == "Roll Twice" or output[1] == output[0]:
-        output[1] = select(random(), table[type])
+        output[1] = select(random(), table, allow_row_twice=False)
     return output
 
 
@@ -137,7 +137,7 @@ color_table = {"Red": 0.05, "Orange": 0.10, "Yellow": 0.20, "Green": 0.45,
 pattern_table = {"Spotted": 0.10, "Mottled": 0.20, "Patches": 0.25,
         "Stripes": 0.25, "Solid": 0.60, "Phases": 0.75, "Translucent": 0.80,
         "Iridescent": 0.85, "Luminescent": 0.90, "Blushed": 0.95, "Roll Twice": 1}
-# Table 6
+# Table 6d
 # Table 6a
 # Table 6b
 # Table 6c
@@ -227,10 +227,10 @@ class Flora(object):
         else:
             self.body["main"].append(select(random(), color_table))
             self.body["main"].append(select(random(), pattern_table))
-        if self.body["branches"][0] != "None":
+        if type(self.body["branches"]) is list:
             self.body["branches"].append(select(random(), color_table) )
             self.body["branches"].append(select(random(), pattern_table) )
-        if self.body["roots"][0] != "None":
+        if type(self.body["roots"]) is list:
             self.body["roots"].append(select(random(), color_table) )
             self.body["roots"].append(select(random(), pattern_table) )
 
