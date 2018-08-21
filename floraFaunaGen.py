@@ -98,16 +98,16 @@ size_table = {"Woody":
 # Table 5
 body_table = {"Woody":
         {"Colonial Mass": 0.02, "Creeper / Vine": 0.20, "Stem / Trunk": 0.70, 
-        "Multiple Stems / Trunks": 0.99, "Roll Twice": 1},
+        "Multiple Stems / Trunks": 0.69, "Roll Twice": 1},
         "Herbaceous":
         {"Colonial Mass": 0.03, "Creeper / Vine": 0.35, "Stem / Trunk": 0.70, 
-        "Multiple Stems / Trunks": 0.98, "Roll Twice": 1},
+        "Multiple Stems / Trunks": 0.68, "Roll Twice": 1},
         "Algae":
         {"Colonial Mass": 0.70, "Creeper / Vine": 0.75, "Stem / Trunk": 0.85, 
-        "Multiple Stems / Trunks": 0.99, "Roll Twice": 1},
+        "Multiple Stems / Trunks": 0.69, "Roll Twice": 1},
         "Fungus":
         {"Colonial Mass": 0.20, "Creeper / Vine": 0.40, "Stem / Trunk": 0.70, 
-        "Multiple Stems / Trunks": 0.99, "Roll Twice": 1} }
+        "Multiple Stems / Trunks": 0.69, "Roll Twice": 1} }
 # Table 5a
 branches_table = {"Woody":
         {"Radial": 0.55, "Ordered": 0.75, "Random": 0.99, "None": 1},
@@ -236,13 +236,7 @@ class Flora(object):
         # Table 5b
         self.body["roots"] = select(random(), roots_table[self.type])
         # Table 5c
-        if self.body["main"] is list:
-            self.body["main"] = [ {"type": self.body["main"][0],
-                    "surface": select(random(), body_surface_table[self.type]) },
-                    {"type": self.body["main"][1],
-                    "surface": select(random(), body_surface_table[self.type]) } ]
-        else:
-            self.body["main"] = {"type": self.body["main"], \
+        self.body["main"] = {"type": self.body["main"], \
                     "surface": select(random(), body_surface_table[self.type])}
         if self.body["branches"] != "None":
             self.body["branches"] = {"type": self.body["branches"], \
