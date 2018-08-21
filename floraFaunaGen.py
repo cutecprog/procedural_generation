@@ -130,7 +130,13 @@ body_surface_table = {"Woody":
         "Flaky": 0.90, "Other": 0.99, "Roll Twice": 1} }
 body_surface_table["Fungus"] = body_surface_table["Algae"]
 # Table 5d
-
+color_table = {"Red": 0.05, "Orange": 0.10, "Yellow": 0.20, "Green": 0.45,
+        "Blue": 0.50, "Violet": 0.55, "Black": 0.60, "Grey": 0.65,
+        "White": 0.70, "Brown": 0.80, "Silver": 0.85, "Copper": 0.90,
+        "Gold": 0.95, "Roll Twice": 1}
+pattern_table = {"Spotted": 0.10, "Mottled": 0.20, "Patches": 0.25,
+        "Stripes": 0.25, "Solid": 0.60, "Phases": 0.75, "Translucent": 0.80,
+        "Iridescent": 0.85, "Luminescent": 0.90, "Blushed": 0.95, "Roll Twice": 1}
 # Table 6
 # Table 6a
 # Table 6b
@@ -211,6 +217,16 @@ class Flora(object):
         if self.body["roots"] != "None":
             self.body["roots"] = [self.body["roots"], select(random(), \
                     body_surface_table[self.type])]
+        # Table 5d
+        if self.body["main"][0] is list:
+            # Is 2d list
+            self.body["main"][0].append(select(random(), color_table))
+            self.body["main"][1].append(select(random(), color_table))
+            self.body["main"][0].append(select(random(), pattern_table))
+            self.body["main"][1].append(select(random(), pattern_table))
+        else:
+            self.body["main"].append(select(random(), color_table))
+            self.body["main"].append(select(random(), pattern_table))
 
 if __name__ == "__main__":
     # execute only if run as a script
