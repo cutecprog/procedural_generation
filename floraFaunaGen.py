@@ -94,6 +94,14 @@ body_table = {"Woody":
         {"Colonial Mass": 0.20, "Creeper / Vine": 0.40, "Stem / Trunk": 0.70, 
         "Multiple Stems / Trunks": 0.99, "Roll Twice": 1} }
 # Table 5a
+branches_table = {"Woody":
+        {"Radial": 0.55, "Ordered": 0.75, "Random": 0.99, "None": 1},
+        "Herbaceous":
+        {"Radial": 0.45, "Ordered": 0.50, "Random": 0.85, "None": 1},
+        "Algae":
+        {"Radial": 0.25, "Ordered": 0.60, "Random": 0.90, "None": 1},
+        "Fungus":
+        {"Radial": 0.02, "Ordered": 0.05, "Random": 0.15, "None": 1} }
 # Table 5b
 # Table 5c
 # Table 5d
@@ -103,7 +111,7 @@ body_table = {"Woody":
 # Table 6c
 # Table 6d
 # Table 6e
-#{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{}}
+#{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 test_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
         "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
 
@@ -139,7 +147,8 @@ class Flora(object):
         self.body = {}
         self.body["main"] = select(random(), body_table[self.type])
         if self.body["main"] == "Roll Twice":
-            self.body["main"] = roll_twice(self.type, body_table2)
+            self.body["main"] = roll_twice(self.type, body_table)
+        self.body["branches"] = select(random(), branches_table[self.type])
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
