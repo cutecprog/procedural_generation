@@ -17,6 +17,15 @@ table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
 
 class Flora(object):
     def __init__(self):
+        self.habitat = {}
+        self.grouping = {}
+        self.size = {}
+        self.body = {}
+        self.leaves = {}
+        self.reproduction = {}
+        self.diet = {}
+        self.sentience = {}
+        self.edibility = {}
         roll = random()
         if roll <= 0.3:
             self.type = "Woody"
@@ -31,28 +40,85 @@ class Flora(object):
             self.type = "Fungus"
             self._fungus()
 
-        self.habitat = {}
-        self.grouping = {}
-        self.size = {}
-        self.body = {}
-        self.leaves = {}
-        self.reproduction = {}
-        self.diet = {}
-        self.sentience = {}
-        self.edibility = {}
-
     def _woody(self):
         roll = random() - 5 * gravity
-        print("w")
+        if roll <= 0.05:
+            self.habitat["primary"] = "Aquatic"
+        elif roll <= 0.1:
+            self.habitat["primary"] = "Sub-Terrestrial"
+        elif roll <= 0.99:
+            self.habitat["primary"] = "Terrestrial"
+        else:
+            self.habitat["primary"] = "Avian"
+
+        roll = random()
+        if self.habitat["primary"] == "Aquatic":
+            if roll <= 0.3:
+                self.habitat["sub"] = "Salt-Water"
+            elif roll <= 0.9:
+                self.habitat["sub"] = "Fresh Water"
+            else:
+                self.habitat["sub"] = "Brackish"
 
     def _herb(self):
-        print("h")
+        roll = random() - 5 * gravity
+        if roll <= 0.35:
+            self.habitat["primary"] = "Aquatic"
+        elif roll <= 0.4:
+            self.habitat["primary"] = "Sub-Terrestrial"
+        elif roll <= 0.99:
+            self.habitat["primary"] = "Terrestrial"
+        else:
+            self.habitat["primary"] = "Avian"
+
+        roll = random()
+        if self.habitat["primary"] == "Aquatic":
+            if roll <= 0.3:
+                self.habitat["sub"] = "Salt-Water"
+            elif roll <= 0.9:
+                self.habitat["sub"] = "Fresh Water"
+            else:
+                self.habitat["sub"] = "Brackish"
 
     def _algae(self):
-        print("a")
+        roll = random() - 5 * gravity
+        if roll <= 0.8:
+            self.habitat["primary"] = "Aquatic"
+        elif roll <= 0.9:
+            self.habitat["primary"] = "Sub-Terrestrial"
+        elif roll <= 0.98:
+            self.habitat["primary"] = "Terrestrial"
+        else:
+            self.habitat["primary"] = "Avian"
+
+        roll = random()
+        if self.habitat["primary"] == "Aquatic":
+            if roll <= 0.3:
+                self.habitat["sub"] = "Salt-Water"
+            elif roll <= 0.9:
+                self.habitat["sub"] = "Fresh Water"
+            else:
+                self.habitat["sub"] = "Brackish"
 
     def _fungus(self):
-        print("f")
+        roll = random() - 5 * gravity
+        if roll <= 0.1:
+            self.habitat["primary"] = "Aquatic"
+        elif roll <= 0.4:
+            self.habitat["primary"] = "Sub-Terrestrial"
+        elif roll <= 0.99:
+            self.habitat["primary"] = "Terrestrial"
+        else:
+            self.habitat["primary"] = "Avian"
+
+        roll = random()
+        if self.habitat["primary"] == "Aquatic":
+            if roll <= 0.3:
+                self.habitat["sub"] = "Salt-Water"
+            elif roll <= 0.9:
+                self.habitat["sub"] = "Fresh Water"
+            else:
+                self.habitat["sub"] = "Brackish"
 
 if __name__ == "__main__":
     # execute only if run as a script
