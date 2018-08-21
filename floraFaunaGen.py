@@ -267,6 +267,8 @@ class Flora(object):
 
     def _generate_leaves(self):
         self.leaves["type"] = select(random(), leaves_table[self.type])
+        if self.type == "Fungus":
+            self.leaves["type"] += " Cap Structure"
         if self.leaves["type"] == "None":
             return
         # Table 6a
@@ -274,6 +276,7 @@ class Flora(object):
             self.leaves["location"] = "Terminal"
         else:
             self.leaves["location"] = select(random(), leaf_location_table)
+        # Table 6b
 
 if __name__ == "__main__":
     # execute only if run as a script
