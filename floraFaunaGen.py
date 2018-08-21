@@ -9,11 +9,19 @@ def main():
     print("The flora is")
     print("{:>12}: ".format("Type") + flora.type)
     print(vars(flora))
+    print(select(random(), \
+            {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}))
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
 table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
-                "reproduction", "diet", "sentience", "edibility"]
+        "reproduction", "diet", "sentience", "edibility"]
+
+def select(roll, weights):
+    for tag in sorted(weights, key=weights.get):
+        # sort table able by weights
+        if roll <= weights[tag]:
+            return tag
 
 class Flora(object):
     def __init__(self):
