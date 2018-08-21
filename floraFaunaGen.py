@@ -58,7 +58,7 @@ grouping_table = {"Woody":
         "Herbaceous":
         {"Solitary": 0.30, "Small Patch": 0.50, "Medium Patch": 0.90, "Large Patch": 1},
         "Algae":
-        {"Solitary": 0.25, "Small Patch": 0.70, "Medium Patch": 0.95, "Large Patch": 1}}
+        {"Solitary": 0.25, "Small Patch": 0.70, "Medium Patch": 0.95, "Large Patch": 1} }
 grouping_table["Fungus"] = grouping_table["Algae"]
 # Table 4
 size_table = {"Woody":
@@ -69,6 +69,30 @@ size_table = {"Woody":
         {"Huge": 0.02, "Large": 0.15, "Average": 0.65, "Small": 0.85, "Tiny": 1},
         "Fungus":
         {"Huge": 0.01, "Large": 0.10, "Average": 0.30, "Small": 0.60, "Tiny": 1} }
+# Table 5
+body_table = {"Woody":
+        {"Colonial Mass": 0.02, "Creeper / Vine": 0.20, "Stem / Trunk": 0.70, 
+        "Multiple Stems / Trunks": 0.99, "Roll Twice": 1},
+        "Herbaceous":
+        {"Colonial Mass": 0.03, "Creeper / Vine": 0.35, "Stem / Trunk": 0.70, 
+        "Multiple Stems / Trunks": 0.98, "Roll Twice": 1},
+        "Algae":
+        {"Colonial Mass": 0.70, "Creeper / Vine": 0.75, "Stem / Trunk": 0.85, 
+        "Multiple Stems / Trunks": 0.99, "Roll Twice": 1},
+        "Fungus":
+        {"Colonial Mass": 0.20, "Creeper / Vine": 0.40, "Stem / Trunk": 0.70, 
+        "Multiple Stems / Trunks": 0.99, "Roll Twice": 1} }
+# Table 5a
+# Table 5b
+# Table 5c
+# Table 5d
+# Table 6
+# Table 6a
+# Table 6b
+# Table 6c
+# Table 6d
+# Table 6e
+#{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{}}
 
 class Flora(object):
     def __init__(self):
@@ -100,6 +124,7 @@ class Flora(object):
         # Table 4
         self.size = select(random(), size_table[self.type])
         self.body = {}
+        self.body["main"] = select(random(), body_table[self.type])
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
