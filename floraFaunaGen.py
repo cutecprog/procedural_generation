@@ -47,9 +47,15 @@ class Flora(object):
         self.habitat = {}
         self.habitat["primary"] = select(random() - 5 * gravity, habitat_table[self.type])
         if self.habitat["primary"] == "Aquatic":
-            self.habitat["sub"] =  select(random(), subhabitat_table["Aquatic"])
+            self.habitat["sub"] = select(random(), subhabitat_table["Aquatic"])
         else:
-            self.habitat["sub"] =  select(random(), subhabitat_table["Other"])
+            self.habitat["sub"] = select(random(), subhabitat_table["Other"])
+            if random() <= 0.10:
+                # 10% chance of two subhabitats
+                additional_subhabitat = select(random(), subhabitat_table["Other"])
+                if additional_subhabitat != self.habitat["sub"]:
+                    # both rolled subhabitats aren't the same
+                    self.habitat["sub"] = [self.habitat["sub"], additional_subhabitat]
 
         self.grouping = {}
         self.size = {}
