@@ -81,9 +81,7 @@ size_table = {"Woody":
         "Fungus":
         {"Huge": 0.01, "Large": 0.10, "Average": 0.30, "Small": 0.60, "Tiny": 1} }
 # Table 5
-body_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
-        "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
-body_table2 = {"Woody":
+body_table = {"Woody":
         {"Colonial Mass": 0.02, "Creeper / Vine": 0.20, "Stem / Trunk": 0.70, 
         "Multiple Stems / Trunks": 0.99, "Roll Twice": 1},
         "Herbaceous":
@@ -106,6 +104,8 @@ body_table2 = {"Woody":
 # Table 6d
 # Table 6e
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{}}
+test_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
+        "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
 
 class Flora(object):
     def __init__(self):
