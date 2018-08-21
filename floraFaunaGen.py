@@ -242,8 +242,8 @@ class Flora(object):
                     {"type": self.body["main"][1],
                     "surface": select(random(), body_surface_table[self.type]) } ]
         else:
-            self.body["main"] = {self.body["main"], select(random(), \
-                    body_surface_table[self.type])}
+            self.body["main"] = {"type": self.body["main"], \
+                    "surface": select(random(), body_surface_table[self.type])}
         if self.body["branches"] != "None":
             self.body["branches"] = {"type": self.body["branches"], \
                     "surface": select(random(), body_surface_table[self.type])}
@@ -258,13 +258,13 @@ class Flora(object):
             self.body["main"][0]["pattern"] = select(random(), pattern_table)
             self.body["main"][1]["pattern"] = select(random(), pattern_table)
         else:
-            self.body["main"].append(select(random(), color_table))
-            self.body["main"].append(select(random(), pattern_table))
-        if self.body["branches"]["type"] != "None":
+            self.body["main"]["color"] = select(random(), color_table)
+            self.body["main"]["pattern"] = select(random(), pattern_table)
+        if self.body["branches"] != "None":
             self.body["branches"]["color"] = select(random(), color_table) 
             self.body["branches"]["pattern"] = select(random(), pattern_table) 
 
-        if self.body["roots"]["type"] != "None":
+        if self.body["roots"] != "None":
             self.body["roots"]["color"] = select(random(), color_table) 
             self.body["roots"]["pattern"] = select(random(), pattern_table) 
 
