@@ -18,7 +18,7 @@ def main():
     print("{:>16}: ".format("Main Body") + str(flora.body["main"]))
     print("{:>16}: ".format("Branches") + str(flora.body["branches"]))
     print("{:>16}: ".format("Roots") + str(flora.body["roots"]))
-    print("{:>16}: ".format("Leaves") + str(flora.leaves))
+    print("{:>16}: ".format("Leaves / Cap") + str(flora.leaves))
     #print("{:>16}: ".format("Leaf Location") + str(flora.leaves["location"]))
     #pprint(vars(flora))
 
