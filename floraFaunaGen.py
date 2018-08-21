@@ -272,8 +272,6 @@ class Flora(object):
         self.leaves["type"] = select(random(), leaves_table[self.type])
         if self.leaves["type"] == "None":
             return
-        if self.type == "Fungus":
-            self.leaves["type"] += " Cap Structure"
         # Table 6a
         if self.type == "Fungus":
             self.leaves["location"] = "Terminal"
