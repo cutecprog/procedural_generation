@@ -171,11 +171,11 @@ class Flora(object):
         # Table 2c
         if type(self.habitat["sub"]) is list:
             self.habitat["sub"] = [
-                    {self.habitat["sub"][0]: select(random(), rarity_table)},
-                    {self.habitat["sub"][1]: select(random(), rarity_table)}]
+                    [self.habitat["sub"][0], select(random(), rarity_table)],
+                    [self.habitat["sub"][1], select(random(), rarity_table)] ]
         else:
             self.habitat["sub"] = \
-                    {self.habitat["sub"]: select(random(), rarity_table)}
+                    [self.habitat["sub"], select(random(), rarity_table)]
         # Table 3
         self.grouping = select(random(), grouping_table[self.type])
         # Table 4
@@ -188,19 +188,20 @@ class Flora(object):
         self.body["roots"] = select(random(), roots_table[self.type])
         # Table 5c
         if self.body["main"] is list:
-            self.body["main"][0] = {self.body["main"][0]: select(random(), \
-                    body_surface_table[self.type])}
-            self.body["main"][1] = {self.body["main"][1]: select(random(), \
-                    body_surface_table[self.type])}
+            self.body["main"] = [
+                    [self.body["main"][0], select(random(), \
+                    body_surface_table[self.type])],
+                    [self.body["main"][1], select(random(), \
+                    body_surface_table[self.type])] ]
         else:
-            self.body["main"] = {self.body["main"]: select(random(), \
-                    body_surface_table[self.type])}
+            self.body["main"] = [self.body["main"], select(random(), \
+                    body_surface_table[self.type])]
         if self.body["branches"] != "None":
-            self.body["branches"] = {self.body["branches"]: select(random(), \
-                    body_surface_table[self.type])}
+            self.body["branches"] = [self.body["branches"], select(random(), \
+                    body_surface_table[self.type])]
         if self.body["roots"] != "None":
-            self.body["roots"] = {self.body["roots"]: select(random(), \
-                    body_surface_table[self.type])}
+            self.body["roots"] = [self.body["roots"], select(random(), \
+                    body_surface_table[self.type])]
 
 if __name__ == "__main__":
     # execute only if run as a script
