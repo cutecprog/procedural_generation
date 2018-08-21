@@ -1,4 +1,5 @@
 """
+Credits:
 Tables (v1.1) by Sebastian Romu
 
 """
@@ -9,21 +10,26 @@ def main():
     flora = Flora()
     flora.generate()
     print("The flora is")
-    print("{:>12}: ".format("Type") + flora.type)
-    print("{:>12}: ".format("Habitat") + str(flora.habitat["primary"]))
-    print("{:>12}: ".format("Sub-Habitat") + str(flora.habitat["sub"]))
-    print("{:>12}: ".format("Grouping") + flora.grouping)
-    print("{:>12}: ".format("Size") + flora.size)
-    print("{:>12}: ".format("Main Body") + str(flora.body["main"]))
-    print("{:>12}: ".format("Branches") + str(flora.body["branches"]))
-    print("{:>12}: ".format("Roots") + str(flora.body["roots"]))
-    print("{:>12}: ".format("Leaves") + str(flora.leaves["type"]))
+    print("{:>16}: ".format("Type") + flora.type)
+    print("{:>16}: ".format("Habitat") + str(flora.habitat["primary"]))
+    print("{:>16}: ".format("Sub-Habitat") + str(flora.habitat["sub"]))
+    print("{:>16}: ".format("Grouping") + flora.grouping)
+    print("{:>16}: ".format("Size") + flora.size)
+    print("{:>16}: ".format("Main Body") + str(flora.body["main"]))
+    print("{:>16}: ".format("Branches") + str(flora.body["branches"]))
+    print("{:>16}: ".format("Roots") + str(flora.body["roots"]))
+    print("{:>16}: ".format("Leaves") + str(flora.leaves["type"]))
+    print("{:>16}: ".format("Leaf Location") + str(flora.leaves["location"]))
     #pprint(vars(flora))
+
+#----------------------- Globals ----------------------------------------------
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
 table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
         "reproduction", "diet", "sentience", "edibility"]
+
+#------------------------ Functions -------------------------------------------
 
 def select(roll, table, allow_row_twice=True):
     for tag in sorted(table, key=table.get):
@@ -49,6 +55,7 @@ def roll_twice(table):
         output[1] = select(random(), table, allow_row_twice=False)
     return output
 
+#------------------------------ Tables ----------------------------------------
 
 # Table 1
 type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
@@ -156,6 +163,9 @@ leaves_table = {"Woody":
         {"Broad": 0.25, "Needles": 0.50, "Compound": 0.60, "Blades": 0.80,
         "Scales": 0.90, "Roll Twice": 0.95, "None": 1} }
 # Table 6a
+leaf_location_table = { "Terminal": 0.30, "Branch Points": 0.50,
+        "Random Interval": 0.70, "Regular Interval": 0.90,
+        "Stem / Trunk": 0.98, "Roll Twice": 1}
 # Table 6b
 # Table 6c
 # Table 6d
@@ -163,6 +173,8 @@ leaves_table = {"Woody":
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 test_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
         "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
+
+#----------------------- Classes ----------------------------------------------
 
 class Flora(object):
     def __init__(self):
@@ -190,6 +202,9 @@ class Flora(object):
         self._generate_body()
         # Table 6
         self.leaves["type"] = select(random(), leaves_table[self.type])
+        if self.type != "Fungus":
+            # Table 6a
+            self.leaves["location"] = select(random(), leaf_location_table)
 
     def _generate_habitat(self):
         # Table 2
