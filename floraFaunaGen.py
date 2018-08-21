@@ -68,7 +68,9 @@ class Flora(object):
                         select(random(), subhabitat_table["Other"]))
         #table 2c
         if type(self.habitat["sub"]) is list:
-            pass
+            self.habitat["sub"] = [
+                    {self.habitat["sub"][0]: select(random(), rarity_table)},
+                    {self.habitat["sub"][1]: select(random(), rarity_table)}]
         else:
             self.habitat["sub"] = \
                     {self.habitat["sub"]: select(random(), rarity_table)}
