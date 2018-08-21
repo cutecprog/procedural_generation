@@ -3,12 +3,14 @@ Tables by Sebastian Romu
 
 """
 from random import random
+from pprint import pprint
 
 def main():
     flora = Flora()
     print("The flora is")
     print("{:>12}: ".format("Type") + flora.type)
-    print(vars(flora))
+    print("{:>12}: ".format("Habitat") + flora.habitat["primary"])
+    pprint(vars(flora))
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
@@ -49,6 +51,14 @@ subhabitat_table = {"Aquatic": \
 rarity_table = {"Very Common": 0.15, "Common": 0.50, "Uncommon": 0.80, \
         "Rare": 0.94, "Very Rare": 0.99, "Unique": 1}
 
+grouping_table = {"Woody": \
+        {"Solitary": 0.20, "Small Patch": 0.40, "Medium Patch": 0.80, "Large Patch": 1},
+        "Herbaceous": \
+        {"Solitary": 0.30, "Small Patch": 0.50, "Medium Patch": 0.90, "Large Patch": 1},
+        "Algae": \
+        {"Solitary": 0.25, "Small Patch": 0.70, "Medium Patch": 0.95, "Large Patch": 1}}
+grouping_table["Fungus"] = grouping_table["Algae"]
+
 class Flora(object):
     def __init__(self):
         # Table 1
@@ -66,7 +76,7 @@ class Flora(object):
                 # 10% chance of two subhabitats
                 self.habitat["sub"] = roll_twice(self.habitat["sub"], \
                         select(random(), subhabitat_table["Other"]))
-        #table 2c
+        # Table 2c
         if type(self.habitat["sub"]) is list:
             self.habitat["sub"] = [
                     {self.habitat["sub"][0]: select(random(), rarity_table)},
@@ -74,7 +84,8 @@ class Flora(object):
         else:
             self.habitat["sub"] = \
                     {self.habitat["sub"]: select(random(), rarity_table)}
-        self.grouping = {}
+        # Table 3
+        self.grouping = select(random(), grouping_table[self.type])
         self.size = {}
         self.body = {}
         self.leaves = {}
