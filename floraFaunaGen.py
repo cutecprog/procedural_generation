@@ -26,7 +26,7 @@ def select(roll, weights):
             return tag
     print("Error: No value less than or equal to " + roll)
 
-def roll_twice(tag, additional_tag):
+def add_without_repeat(tag, additional_tag):
     if additional_tag != tag:
         # both rolled subhabitats aren't the same
         return [tag, additional_tag]
@@ -109,7 +109,7 @@ class Flora(object):
             self.habitat["sub"] = select(random(), subhabitat_table["Other"])
             if random() <= 0.10:
                 # 10% chance of two subhabitats
-                self.habitat["sub"] = roll_twice(self.habitat["sub"], \
+                self.habitat["sub"] = add_without_repeat(self.habitat["sub"], \
                         select(random(), subhabitat_table["Other"]))
         # Table 2c
         if type(self.habitat["sub"]) is list:
