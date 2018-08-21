@@ -23,6 +23,11 @@ def select(roll, weights):
         if roll <= weights[tag]:
             return tag
 
+def roll_twice(tag, additional_tag):
+    if additional_tag != tag:
+        # both rolled subhabitats aren't the same
+        return [tag, additional_tag]
+
 type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
 
 habitat_table = {"Woody": \
@@ -52,10 +57,8 @@ class Flora(object):
             self.habitat["sub"] = select(random(), subhabitat_table["Other"])
             if random() <= 0.10:
                 # 10% chance of two subhabitats
-                additional_subhabitat = select(random(), subhabitat_table["Other"])
-                if additional_subhabitat != self.habitat["sub"]:
-                    # both rolled subhabitats aren't the same
-                    self.habitat["sub"] = [self.habitat["sub"], additional_subhabitat]
+                self.habitat["sub"] = roll_twice(self.habitat["sub"], \
+                        select(random(), subhabitat_table["Other"]))
 
         self.grouping = {}
         self.size = {}
