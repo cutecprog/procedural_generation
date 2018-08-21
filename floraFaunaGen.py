@@ -209,24 +209,27 @@ class Flora(object):
     def _generate_habitat(self):
         # Table 2
         self.habitat["primary"] = select(random() - 5 * gravity, habitat_table[self.type])
+        # Table 2a, 2b
+        self.habitat["sub"] = {}
         if self.habitat["primary"] == "Aquatic":
             # Table 2a
-            self.habitat["sub"] = select(random(), subhabitat_table["Aquatic"])
+            self.habitat["sub"]["type"] = select(random(), subhabitat_table["Aquatic"])
         else:
             # Table 2b
-            self.habitat["sub"] = select(random(), subhabitat_table["Other"])
             if random() <= 0.10:
                 # 10% chance of two subhabitats
-                self.habitat["sub"] = add_without_repeat(self.habitat["sub"], \
-                        select(random(), subhabitat_table["Other"]))
+                self.habitat["sub"] = roll_twice(subhabitat_table["Other"])
+                self.habitat["sub"][0] = {"type": self.habitat["sub"][0]}
+                self.habitat["sub"][1] = {"type": self.habitat["sub"][1]}
+            else:
+                self.habitat["sub"]["type"] = select(random(), \
+                        subhabitat_table["Other"])
         # Table 2c
         if type(self.habitat["sub"]) is list:
-            self.habitat["sub"] = [
-                    [self.habitat["sub"][0], select(random(), rarity_table)],
-                    [self.habitat["sub"][1], select(random(), rarity_table)] ]
+            self.habitat["sub"][0]["rarity"] = select(random(), rarity_table)
+            self.habitat["sub"][1]["rarity"] = select(random(), rarity_table)
         else:
-            self.habitat["sub"] = \
-                    [self.habitat["sub"], select(random(), rarity_table)]
+            self.habitat["sub"]["rarity"] = select(random(), rarity_table)
 
     def _generate_body(self):
         # Table 5
