@@ -10,10 +10,14 @@ def main():
     flora.generate()
     print("The flora is")
     print("{:>12}: ".format("Type") + flora.type)
-    print("{:>12}: ".format("Habitat") + flora.habitat["primary"])
+    print("{:>12}: ".format("Habitat") + str(flora.habitat["primary"]))
+    print("{:>12}: ".format("Sub-Habitat") + str(flora.habitat["sub"]))
     print("{:>12}: ".format("Grouping") + flora.grouping)
     print("{:>12}: ".format("Size") + flora.size)
-    pprint(vars(flora))
+    print("{:>12}: ".format("Main Body") + str(flora.body["main"]))
+    print("{:>12}: ".format("Branches") + str(flora.body["branches"]))
+    print("{:>12}: ".format("Roots") + str(flora.body["roots"]))
+    #pprint(vars(flora))
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
