@@ -23,9 +23,20 @@ def select(roll, weights):
         if roll <= weights[tag]:
             return tag
 
+type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
+habitat_table = {"Woody": \
+        {"Aquatic": 0.05, "Sub-Terrestrial": 0.10, "Terrestrial": 0.99, "Avian": 1}, \
+        "Herbaceous": \
+        {"Aquatic": 0.35, "Sub-Terrestrial": 0.40, "Terrestrial": 0.99, "Avian": 1}, \
+        "Algae": \
+        {"Aquatic": 0.80, "Sub-Terrestrial": 0.90, "Terrestrial": 0.98, "Avian": 1}, \
+        "Fungus": \
+        {"Aquatic": 0.10, "Sub-Terrestrial": 0.40, "Terrestrial": 0.99, "Avian": 1} }
+
 class Flora(object):
     def __init__(self):
-        self.habitat = {}
+        self.type = select(random(), type_table)
+        self.habitat = select(random() - 5 * gravity, habitat_table[self.type])
         self.grouping = {}
         self.size = {}
         self.body = {}
@@ -34,19 +45,6 @@ class Flora(object):
         self.diet = {}
         self.sentience = {}
         self.edibility = {}
-        roll = random()
-        if roll <= 0.3:
-            self.type = "Woody"
-            self._woody()
-        elif roll <= 0.85:
-            self.type = "Herbaceous"
-            self._herb()
-        elif roll <= 0.90:
-            self.type = "Algae"
-            self._algae()
-        else:
-            self.type = "Fungus"
-            self._fungus()
 
     def _woody(self):
         roll = random() - 5 * gravity
