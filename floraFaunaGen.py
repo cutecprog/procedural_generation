@@ -227,6 +227,12 @@ class Flora(object):
         else:
             self.body["main"].append(select(random(), color_table))
             self.body["main"].append(select(random(), pattern_table))
+        if self.body["branches"][0] != "None":
+            self.body["branches"].append(select(random(), color_table) )
+            self.body["branches"].append(select(random(), pattern_table) )
+        if self.body["roots"][0] != "None":
+            self.body["roots"].append(select(random(), color_table) )
+            self.body["roots"].append(select(random(), pattern_table) )
 
 if __name__ == "__main__":
     # execute only if run as a script
