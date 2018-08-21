@@ -7,6 +7,7 @@ from pprint import pprint
 
 def main():
     flora = Flora()
+    flora.generate()
     print("The flora is")
     print("{:>12}: ".format("Type") + flora.type)
     print("{:>12}: ".format("Habitat") + flora.habitat["primary"])
@@ -141,10 +142,21 @@ test_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
 
 class Flora(object):
     def __init__(self):
+        self.type = ""
+        self.habitat = {}
+        self.grouping = ""
+        self.size = ""
+        self.body = {}
+        self.leaves = {}
+        self.reproduction = {}
+        self.diet = {}
+        self.sentience = {}
+        self.edibility = {}
+
+    def generate(self):
         # Table 1
         self.type = select(random(), type_table)
         # Table 2
-        self.habitat = {}
         self.habitat["primary"] = select(random() - 5 * gravity, habitat_table[self.type])
         if self.habitat["primary"] == "Aquatic":
             # Table 2a
@@ -169,7 +181,6 @@ class Flora(object):
         # Table 4
         self.size = select(random(), size_table[self.type])
         # Table 5
-        self.body = {}
         self.body["main"] = select(random(), body_table[self.type])
         # Table 5a
         self.body["branches"] = select(random(), branches_table[self.type])
@@ -190,11 +201,6 @@ class Flora(object):
         if self.body["roots"] != "None":
             self.body["roots"] = {self.body["roots"]: select(random(), \
                     body_surface_table[self.type])}
-        self.leaves = {}
-        self.reproduction = {}
-        self.diet = {}
-        self.sentience = {}
-        self.edibility = {}
 
 if __name__ == "__main__":
     # execute only if run as a script
