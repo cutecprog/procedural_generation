@@ -237,14 +237,13 @@ class Flora(object):
         self.body["roots"] = select(random(), roots_table[self.type])
         # Table 5c
         if self.body["main"] is list:
-            self.body["main"] = [
-                    [self.body["main"][0], select(random(), \
-                    body_surface_table[self.type])],
-                    [self.body["main"][1], select(random(), \
-                    body_surface_table[self.type])] ]
+            self.body["main"] = [ {"type": self.body["main"][0],
+                    "surface": select(random(), body_surface_table[self.type]) },
+                    {"type": self.body["main"][1],
+                    "surface": select(random(), body_surface_table[self.type]) } ]
         else:
-            self.body["main"] = [self.body["main"], select(random(), \
-                    body_surface_table[self.type])]
+            self.body["main"] = {self.body["main"], select(random(), \
+                    body_surface_table[self.type])}
         if self.body["branches"] != "None":
             self.body["branches"] = {"type": self.body["branches"], \
                     "surface": select(random(), body_surface_table[self.type])}
@@ -252,12 +251,12 @@ class Flora(object):
             self.body["roots"] = {"type": self.body["roots"], \
                     "surface": select(random(), body_surface_table[self.type])}
         # Table 5d
-        if self.body["main"][0] is list:
+        if self.body["main"] is list:
             # Is 2d list
-            self.body["main"][0].append(select(random(), color_table))
-            self.body["main"][1].append(select(random(), color_table))
-            self.body["main"][0].append(select(random(), pattern_table))
-            self.body["main"][1].append(select(random(), pattern_table))
+            self.body["main"][0]["color"] = select(random(), color_table)
+            self.body["main"][1]["color"] = select(random(), color_table)
+            self.body["main"][0]["pattern"] = select(random(), pattern_table)
+            self.body["main"][1]["pattern"] = select(random(), pattern_table)
         else:
             self.body["main"].append(select(random(), color_table))
             self.body["main"].append(select(random(), pattern_table))
