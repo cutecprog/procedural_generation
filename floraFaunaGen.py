@@ -190,6 +190,28 @@ leaf_venation_table = {"Arcuate": 0.10, "Cross-Venulate": 0.20,
         "Roll Twice": 1 }
 leaf_numbers_table = {"Single": 0.20, "Pairs": 0.40, "Whorls": 0.60,
         "Clusters": 0.95, "Roll Twice": 1}
+# Table 7
+# Table 7a
+# Table 7b
+# Table 7c
+# Table 7d
+# Table 7e
+# Table 7f
+# Table 7g
+# Table 7h
+# Table 7i
+# Table 7j
+# Table 7k
+# Table 7l
+# Table 8
+# Table 8a
+# Table 9
+# Table 9a
+# Table 10
+# Table 10a
+# Table 10b
+# Table 10c
+
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 
 #----------------------- Classes ----------------------------------------------
