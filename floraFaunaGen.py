@@ -317,6 +317,9 @@ edible_preparation_table = {"Edible":
         {"Raw": 0.30, "Roasted": 0.45, "Boiled": 0.55, "Ground": 0.65,
         "Steeped": 0.75, "Blanched": 0.80, "Dried": 1} }
 # Table 10b
+medicinal_properties_table = {'Abortifacient': 0.0, 'Acrid': 0.01,
+        'Adjuvant': 0.02, 'Alterative': 0.03, 'Analgesic': 0.04, 'Anaphrodisiac': 0.05, 'Anesthetic': 0.06, 'Anodyne': 0.07, 'Anthelmintic': 0.08, 'Antibiotic': 0.09, 'Anticoagulant': 0.1, 'Antiemetic': 0.11, 'Antifungal': 0.12, 'Antihydrotic': 0.13, 'Antilithic': 0.14, 'Antinauseant': 0.15, 'Antiperodic': 0.16, 'Antiphlogistic': 0.17, 'Antipyretic': 0.18, 'Antiscorbutic': 0.19, 'Antiscrufulous': 0.2, 'Antiseptic': 0.21, 'Antispasmodic': 0.22, 'Antitussive': 0.23, 'Aperient': 0.24, 'Aphrodisiac': 0.25, 'Appetizer': 0.26, 'Aromatic': 0.27, 'Astringent': 0.28, 'Balsam': 0.29, 'Bitter': 0.3, 'Bitter tonic.': 0.31, 'Calmative': 0.32, 'Cardiac': 0.33, 'Carminative.': 0.34, 'Cathartic': 0.35, 'Caustic': 0.36, 'Cholagogue': 0.37, 'Coagulant': 0.38, 'Colourant': 0.39, 'Counterirritant': 0.4, 'Demulcent': 0.41, 'Deodourant': 0.42, 'Depressant': 0.43, 'Depurative': 0.44, 'Detergent': 0.45, 'Diaphoretic': 0.46, 'Digestive': 0.47, 'Disinfectant': 0.48, 'Diuretic': 0.49, 'Dye': 0.5, 'Emetic': 0.51, 'Emmenagogue': 0.52, 'Emollient': 0.53, 'Errihine': 0.54, 'Euphoriant': 0.55, 'Expectorant': 0.56, 'Febrifuge': 0.57, 'Fungicide': 0.58, 'Galactagogue': 0.59, 'Glue': 0.6, 'Haemostatic': 0.61, 'Hallucinogen': 0.62, 'Hepatic': 0.63, 'Hydragogue': 0.64, 'Hypnotic': 0.65, 'Insecticide': 0.66, 'Irritant': 0.67, 'Laxative': 0.68, 'Mucilaginous': 0.69, 'Mystical / Other': 0.7, 'Narcotic': 0.71, 'Nauseant': 0.72, 'Nephretic': 0.73, 'Nervine': 0.74, 'Oil': 0.75, 'Oxytocic': 0.76, 'Pectoral': 0.77, 'Poison': 0.78, 'Purgative': 0.79, 'Refridgerant': 0.8, 'Restorative': 0.81, 'Rubefacient': 0.82, 'Sedative': 0.83, 'Sialagogue': 0.84, 'Soporific': 0.85, 'Specific': 0.86, 'Stimulant': 0.87, 'Stomachic': 0.88, 'Vasodialator': 0.89, 'Vermicide': 0.9, 'Vermifuge': 0.91, 'Vesicant': 0.92, 'Vulnerary': 0.93, 'Wax': 0.94, "Mystical / Other": 0.95, "Roll Twice": 1 }
+
 # Table 10c
 #{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
@@ -480,14 +483,17 @@ class Flora(object):
                 self.__get_random_use_of_type)
     
     def __get_random_use_of_type(self, type):
+        # Table 10a
         use = {"type": type}
         if type == "Edible" or type == "Nutritious / Tasty":
             use["preparation"] = \
                     select(edible_preparation_table[type])
+        # Table 10b+
         if type == "Medicinal":
-            use["property"] = ""
+            # Table 10b
+            use["property"] = select(medicinal_properties_table)
+            # Table 10c
             use["preparation"] = ""
-            
         return use
 
 if __name__ == "__main__":
