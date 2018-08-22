@@ -281,7 +281,19 @@ sentience_chance = {"Photo/Chemo-synthetic": 0.99, "Predaceous": 0.97,
 # Table 9a
 sentience_table = {"Instinctual": 0.75, "Hive": 0.79, "Animal": 0.89,
         "Cunning Animal": 0.99, "Sapient": 1}
-# Table 10
+# Table 10 (Modified table: "Medicinal / Other" to "Medicinal")
+edibility_table = {"Woody":
+        {"Non-Edible": 0.40, "Edible": 0.65, "Nutritious / Tasty": 0.80,
+        "Medicinal": 0.99, "Roll Twice": 1},
+        "Herbaceous":
+        {"Non-Edible": 0.15, "Edible": 0.45, "Nutritious / Tasty": 0.60,
+        "Medicinal": 0.99, "Roll Twice": 1},
+        "Algae":
+        {"Non-Edible": 0.60, "Edible": 0.85, "Nutritious / Tasty": 0.90,
+        "Medicinal": 0.99, "Roll Twice": 1},
+        "Fungus":
+        {"Non-Edible": 0.30, "Edible": 0.60, "Nutritious / Tasty": 0.86,
+        "Medicinal": 0.99, "Roll Twice": 1} }
 # Table 10a
 # Table 10b
 # Table 10c
@@ -324,6 +336,8 @@ class Flora(object):
         self.diet["tropism"] = select(tropism_table[self.type])
         # Table 9*
         self._generate_sentience()
+        # Table 10*
+        self._generate_edibility()
 
     def _generate_habitat(self):
         # Table 2
@@ -445,6 +459,9 @@ class Flora(object):
             self.sentience = select(sentience_table, modifier)
             if self.sentience == "Hive":
                 self.sentience = [self.sentience, select(sentience_table, modifier)]
+
+    def _generate_edibility(self):
+        self.edibility["type"] = select(edibility_table[self.type])
 
 if __name__ == "__main__":
     # execute only if run as a script
