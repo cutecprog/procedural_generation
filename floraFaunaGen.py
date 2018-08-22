@@ -519,7 +519,11 @@ class Flora(object):
         # Table 7e
         self.reproduction["flower_size"] = select(flower_size_table)
         # Table 7f
-        # Table 7g
+        self.reproduction["petal_number"] = \
+                roll_dice(select(petal_number_table))
+        if self.reproduction["petal_number"] > 0:
+            self.reproduction["petal_shape"] = select(petal_shape_table)
+            # Table 7g
         # Table 7h
         # Table 7i
         # Table 7j
