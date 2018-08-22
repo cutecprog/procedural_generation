@@ -531,9 +531,14 @@ class Flora(object):
         # Table 7h
         self.reproduction["flower_location"] = select(flower_location_table)
         # Table 7i
+        self.reproduction["flower_scent"] = select(flower_scent_table)
         # Table 7j
+        self.reproduction["flower_frequency"] = select(flower_frequency_table)
         # Table 7k
+        self.reproduction["flower_color"] = select(flower_color_table)
         # Table 7l
+        self.reproduction["flower_stamens"] = select(flower_stamens_table)
+        self.reproduction["flower_pistils"] = select(flower_pistils_table)
 
     def _generate_sentience(self):
         roll = random() + aura * 0.05
