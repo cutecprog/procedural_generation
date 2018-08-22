@@ -524,6 +524,10 @@ class Flora(object):
         if self.reproduction["petal_number"] > 0:
             self.reproduction["petal_shape"] = select(petal_shape_table)
             # Table 7g
+            self.reproduction["petal_surface_inside"] = \
+                    select(petal_surface_table)
+            self.reproduction["petal_surface_outside"] = \
+                    select(petal_surface_table)
         # Table 7h
         # Table 7i
         # Table 7j
