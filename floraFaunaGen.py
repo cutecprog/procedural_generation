@@ -32,13 +32,15 @@ table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
 
 def select(table, modifier = 0, allow_row_twice = True):
     roll = random() + modifier
+    if roll > 1.0:
+        roll = 1.0
     for tag in sorted(table, key=table.get):
         # sort table able by weights
         if roll <= table[tag]:
             if allow_row_twice and tag == "Roll Twice":
                 return roll_twice(table, modifier)
             return tag
-    print("Error: No value less than or equal to " + roll)
+    print("Error: No value less than or equal to " + str(roll))
 
 def add_without_repeat(tag, additional_tag):
     if additional_tag != tag:
@@ -469,22 +471,9 @@ class Flora(object):
 
     def _generate_edibility(self):
         # Table 10
-        self.edibility["type"] = select(edibility_table[self.type])
-        if type(self.edibility["type"]) is list:
-            self.edibility = [{"type": self.edibility["type"][0]}, \
-                    {"type": self.edibility["type"][1]} ]
-        # Tables 10a+
-        if type(self.edibility) is list:
-            self.edibility[0] = \
-                    self.__get_random_edible_property_of_type(
-                    self.edibility[0]["type"])
-            self.edibility[1] = \
-                    self.__get_random_edible_property_of_type(
-                    self.edibility[1]["type"])
-        else:
-            self.edibility = \
-                    self.__get_random_edible_property_of_type(
-                    self.edibility["type"])
+        self.edibility["type"] = select(edibility_table[self.type], modifier=0.5)
+        self.leaves = account_for_two(self.edibility,
+                self.__get_random_edible_property_of_type)
     
     def __get_random_edible_property_of_type(self, type):
         self.edibility["preparation"] = ""
