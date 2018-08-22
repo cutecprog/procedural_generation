@@ -184,6 +184,10 @@ leaf_margin_table = {"Smooth": 0.15, "Sinuate": 0.30, "Undulate": 0.40, "Spiny":
 leaf_surface_table = {"Smooth": 0.25, "Waxy": 0.40, "Scaly": 0.55, "Hairy": 0.65,
         "Velvety": 0.80, "Dusty": 0.90, "Sticky": 0.96, "Roll Twice": 1}
 # Table 6d
+leaf_venation_table = {"Arcuate": 0.10, "Cross-Venulate": 0.20,
+        "Dichotomous": 0.30, "Longitudinal": 0.45, "Palmate": 0.60,
+        "Parallel": 0.70, "Pinnate": 0.80, "Reticulate": 0.90, "None": 0.99,
+        "Roll Twice": 1 }
 # Table 6e
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 
@@ -296,6 +300,8 @@ class Flora(object):
         # Table 6c
         leaf["surface_topside"] = select(random(), leaf_surface_table)
         leaf["surface_underside"] = select(random(), leaf_surface_table)
+        # Table 6d
+        leaf["venation"] = select(random(), leaf_venation_table)
         return leaf
 
 if __name__ == "__main__":
