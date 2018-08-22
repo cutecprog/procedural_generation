@@ -248,6 +248,20 @@ flower_table = {"Grain":
 # Table 7k
 # Table 7l
 # Table 8
+diet_table = {"Woody":
+        {"Photo/Chemo-synthetic": 0.89, "Predaceous": 0.90, "Decay": 0.95,
+        "Parasitic": 0.98, "Symbiotic": 0.99, "Roll Twice": 1},
+        "Herbaceous":
+        {"Photo/Chemo-synthetic": 0.85, "Predaceous": 0.87, "Decay": 0.93,
+        "Parasitic": 0.96, "Symbiotic": 0.98, "Roll Twice": 1},
+        "Algae":
+        {"Photo/Chemo-synthetic": 0.92, "Predaceous": 0.93, "Decay": 0.94,
+        "Parasitic": 0.95, "Symbiotic": 0.99, "Roll Twice": 1},
+        "Fungus":
+        {"Photo/Chemo-synthetic": 0.05, "Predaceous": 0.08, "Decay": 0.90,
+        "Parasitic": 0.94, "Symbiotic": 0.98, "Roll Twice": 1}
+        # Change made above to ^^^^ 0.99 to 0.98
+        }
 # Table 8a
 # Table 9
 # Table 9a
@@ -288,6 +302,8 @@ class Flora(object):
         self._generate_leaves()
         # Table 7*
         self._generate_reproduction()
+        # Table 8
+        self.diet["type"] = select(diet_table[self.type])
 
     def _generate_habitat(self):
         # Table 2
@@ -389,6 +405,8 @@ class Flora(object):
         # Table 7c
         self.reproduction["flower_type"] = \
                 select(flower_table[self.reproduction["seed_type"]])
+        if self.reproduction["flower_type"] == "None":
+            return
 
 if __name__ == "__main__":
     # execute only if run as a script
