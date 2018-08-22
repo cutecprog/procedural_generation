@@ -358,10 +358,6 @@ medicinal_preparation_table = {"Bath": 0.05, "Cold Compress": 0.10,
         "Vapour / Smoke": 0.89, "Wash": 0.93, "Whole": 0.95, "Other": 0.98,
         "Roll Twice": 1}
 
-#{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
-#{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
-#{"Single":{},"Pairs":{},"Bunches":{},"Compound":{},"Spray":{},"Other":{} }
-
 #----------------------- Classes ----------------------------------------------
 
 class Flora(object):
