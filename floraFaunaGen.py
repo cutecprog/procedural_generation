@@ -276,8 +276,10 @@ tropism_table = {"Woody":
         {"None": 0.30, "Gravity": 0.70, "Light": 0.80, "Heat": 0.90,
         "Touch": 0.96, "Motile": 0.98, "Mobile": 0.99, "Roll Twice": 1} }
 # Table 9
-
+sentience_chance = {"Photo/Chemo-synthetic": 0.99, "Predaceous": 0.97,
+        "Decay": 0.99, "Parasitic": 0.98, "Symbiotic": 0.98, "Other": 0.97 }
 # Table 9a
+sentience_table = {"Instinctual Hive** Animal Cunning Animal Sapient": 1}
 # Table 10
 # Table 10a
 # Table 10b
@@ -297,7 +299,7 @@ class Flora(object):
         self.leaves = {}
         self.reproduction = {}
         self.diet = {}
-        self.sentience = {}
+        self.sentience = ""
         self.edibility = {}
 
     def generate(self):
@@ -319,10 +321,12 @@ class Flora(object):
         self.diet["type"] = select(diet_table[self.type])
         # Table 8a
         self.diet["tropism"] = select(tropism_table[self.type])
+        # Table 9*
+        self._generate_sentience()
 
     def _generate_habitat(self):
         # Table 2
-        self.habitat["primary"] = select(habitat_table[self.type], -5 * gravity)
+        self.habitat["primary"] = select(habitat_table[self.type], -0.05 * gravity)
         # Table 2a, 2b
         self.habitat["sub"] = {}
         if self.habitat["primary"] == "Aquatic":
@@ -422,6 +426,17 @@ class Flora(object):
                 select(flower_table[self.reproduction["seed_type"]])
         if self.reproduction["flower_type"] == "None":
             return
+
+    def _generate_sentience(self):
+        roll = random() + aura * 0.05
+        if self.diet["tropism"] == "Motile":
+            roll += 0.10
+        elif self.diet["tropism"] == "Mobile":
+            roll += 0.20
+        if roll <= sentience_chance[self.diet["type"]]:
+            self.sentience = "Non-Sentient"
+        else:
+            self.sentience = select(sentience_table)
 
 if __name__ == "__main__":
     # execute only if run as a script
