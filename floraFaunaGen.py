@@ -279,7 +279,8 @@ tropism_table = {"Woody":
 sentience_chance = {"Photo/Chemo-synthetic": 0.99, "Predaceous": 0.97,
         "Decay": 0.99, "Parasitic": 0.98, "Symbiotic": 0.98, "Other": 0.97 }
 # Table 9a
-sentience_table = {"Instinctual Hive** Animal Cunning Animal Sapient": 1}
+sentience_table = {"Instinctual": 0.75, "Hive": 0.79, "Animal": 0.89,
+        "Cunning Animal": 0.99, "Sapient": 1}
 # Table 10
 # Table 10a
 # Table 10b
@@ -437,6 +438,8 @@ class Flora(object):
             self.sentience = "Non-Sentient"
         else:
             self.sentience = select(sentience_table)
+            if self.sentience == "Hive":
+                self.sentience = [self.sentience, select(sentience_table)]
 
 if __name__ == "__main__":
     # execute only if run as a script
