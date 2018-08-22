@@ -319,6 +319,7 @@ class Flora(object):
             self.body["roots"]["pattern"] = select(random(), pattern_table) 
 
     def _generate_leaves(self):
+        # Table 6
         self.leaves["type"] = select(random(), leaves_table[self.type])
         if type(self.leaves["type"]) is list:
             self.leaves = [{"type": self.leaves["type"][0]}, \
@@ -340,6 +341,8 @@ class Flora(object):
         else:
             leaf["location"] = select(random(), leaf_location_table)
         # Table 6b
+        leaf["shape"] = select(random(), leaf_shape)
+        leaf["margin"] = select(random(), leaf_margin)
         return leaf
 
 if __name__ == "__main__":
