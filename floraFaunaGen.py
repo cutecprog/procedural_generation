@@ -288,8 +288,11 @@ petal_shape_table = {"Round": 0.10, "Curly": 0.25, "Wavy": 0.40,
         "Feathery": 0.90, "Roll Twice": 1}
 petal_number_table = \
         {"None": 0.10, "1d6": 0.30, "3d4": 0.60, "4d6": 0.90,"5d20": 1}
-# Table 7g
-petal_surface_table = {}
+# Table 7g (Change "Other / Roll Twice" to just "Roll Twice")
+petal_surface_table = {"Smooth": 0.15, "Waxy": 0.30, "Veined": 0.40,
+        "Scaly": 0.45, "Hairy": 0.60, "Velvety": 0.80, "Dusty": 0.90,
+        "Sticky": 0.96, "Twice Roll": 1}
+Twice
 # Table 7h
 flower_location_table = {}
 # Table 7i
