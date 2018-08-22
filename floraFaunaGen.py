@@ -437,9 +437,14 @@ class Flora(object):
         if roll <= sentience_chance[self.diet["type"]]:
             self.sentience = "Non-Sentient"
         else:
-            self.sentience = select(sentience_table)
+            modifier = 0.05 * aura
+            if self.diet["type"] == "Symbiotic":
+                modifier += 0.05
+            elif self.diet["type"] == "Predaceous":
+                modifier += 0.10
+            self.sentience = select(sentience_table, modifier)
             if self.sentience == "Hive":
-                self.sentience = [self.sentience, select(sentience_table)]
+                self.sentience = [self.sentience, select(sentience_table, modifier)]
 
 if __name__ == "__main__":
     # execute only if run as a script
