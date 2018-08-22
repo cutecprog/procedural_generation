@@ -30,12 +30,13 @@ table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
 
 #------------------------ Functions -------------------------------------------
 
-def select(roll, table, allow_row_twice=True):
+def select(table, modifier = 0, allow_row_twice = True):
+    roll = random() + modifier
     for tag in sorted(table, key=table.get):
         # sort table able by weights
         if roll <= table[tag]:
             if allow_row_twice and tag == "Roll Twice":
-                return roll_twice(table)
+                return roll_twice(table, modifier)
             return tag
     print("Error: No value less than or equal to " + roll)
 
@@ -45,13 +46,13 @@ def add_without_repeat(tag, additional_tag):
         return [tag, additional_tag]
     return tag
 
-def roll_twice(table):
+def roll_twice(table, modifier = 0):
     output = ["Roll Twice", "Roll Twice"]
     # Reroll if land on roll twice
     while output[0] == "Roll Twice":
-        output[0] = select(random(), table, allow_row_twice=False)
+        output[0] = select(table, allow_row_twice=False)
     while output[1] == "Roll Twice" or output[1] == output[0]:
-        output[1] = select(random(), table, allow_row_twice=False)
+        output[1] = select(table, allow_row_twice=False)
     return output
 
 #------------------------------ Tables ----------------------------------------
@@ -249,13 +250,13 @@ class Flora(object):
 
     def generate(self):
         # Table 1
-        self.type = select(random(), type_table)
+        self.type = select(type_table)
         # Table 2*
         self._generate_habitat()
         # Table 3
-        self.grouping = select(random(), grouping_table[self.type])
+        self.grouping = select(grouping_table[self.type])
         # Table 4
-        self.size = select(random(), size_table[self.type])
+        self.size = select(size_table[self.type])
         # Table 5*
         self._generate_body()
         # Table 6*
@@ -265,12 +266,12 @@ class Flora(object):
 
     def _generate_habitat(self):
         # Table 2
-        self.habitat["primary"] = select(random() - 5 * gravity, habitat_table[self.type])
+        self.habitat["primary"] = select(habitat_table[self.type], -5 * gravity)
         # Table 2a, 2b
         self.habitat["sub"] = {}
         if self.habitat["primary"] == "Aquatic":
             # Table 2a
-            self.habitat["sub"]["type"] = select(random(), subhabitat_table["Aquatic"])
+            self.habitat["sub"]["type"] = select(subhabitat_table["Aquatic"])
         else:
             # Table 2b
             if random() <= 0.10:
@@ -279,45 +280,45 @@ class Flora(object):
                 self.habitat["sub"][0] = {"type": self.habitat["sub"][0]}
                 self.habitat["sub"][1] = {"type": self.habitat["sub"][1]}
             else:
-                self.habitat["sub"]["type"] = select(random(), \
+                self.habitat["sub"]["type"] = select(\
                         subhabitat_table["Other"])
         # Table 2c
         if type(self.habitat["sub"]) is list:
-            self.habitat["sub"][0]["rarity"] = select(random(), rarity_table)
-            self.habitat["sub"][1]["rarity"] = select(random(), rarity_table)
+            self.habitat["sub"][0]["rarity"] = select(rarity_table)
+            self.habitat["sub"][1]["rarity"] = select(rarity_table)
         else:
-            self.habitat["sub"]["rarity"] = select(random(), rarity_table)
+            self.habitat["sub"]["rarity"] = select(rarity_table)
 
     def _generate_body(self):
         # Table 5
-        self.body["main"] = select(random(), body_table[self.type])
+        self.body["main"] = select(body_table[self.type])
         # Table 5a
-        self.body["branches"] = select(random(), branches_table[self.type])
+        self.body["branches"] = select(branches_table[self.type])
         # Table 5b
-        self.body["roots"] = select(random(), roots_table[self.type])
+        self.body["roots"] = select(roots_table[self.type])
         # Table 5c
         self.body["main"] = {"type": self.body["main"], \
-                    "surface": select(random(), body_surface_table[self.type])}
+                    "surface": select(body_surface_table[self.type])}
         if self.body["branches"] != "None":
             self.body["branches"] = {"type": self.body["branches"], \
-                    "surface": select(random(), body_surface_table[self.type])}
+                    "surface": select(body_surface_table[self.type])}
         if self.body["roots"] != "None":
             self.body["roots"] = {"type": self.body["roots"], \
-                    "surface": select(random(), body_surface_table[self.type])}
+                    "surface": select(body_surface_table[self.type])}
         # Table 5d
-        self.body["main"]["color"] = select(random(), color_table)
-        self.body["main"]["pattern"] = select(random(), pattern_table)
+        self.body["main"]["color"] = select(color_table)
+        self.body["main"]["pattern"] = select(pattern_table)
         if self.body["branches"] != "None":
-            self.body["branches"]["color"] = select(random(), color_table) 
-            self.body["branches"]["pattern"] = select(random(), pattern_table) 
+            self.body["branches"]["color"] = select(color_table) 
+            self.body["branches"]["pattern"] = select(pattern_table) 
 
         if self.body["roots"] != "None":
-            self.body["roots"]["color"] = select(random(), color_table) 
-            self.body["roots"]["pattern"] = select(random(), pattern_table) 
+            self.body["roots"]["color"] = select(color_table) 
+            self.body["roots"]["pattern"] = select(pattern_table) 
 
     def _generate_leaves(self):
         # Table 6
-        self.leaves["type"] = select(random(), leaves_table[self.type])
+        self.leaves["type"] = select(leaves_table[self.type])
         if type(self.leaves["type"]) is list:
             self.leaves = [{"type": self.leaves["type"][0]}, \
                     {"type": self.leaves["type"][1]} ]
@@ -336,29 +337,29 @@ class Flora(object):
         if self.type == "Fungus":
             leaf["location"] = "Terminal"
         else:
-            leaf["location"] = select(random(), leaf_location_table)
+            leaf["location"] = select(leaf_location_table)
         # Table 6b
-        leaf["shape"] = select(random(), leaf_shape_table)
-        leaf["margin"] = select(random(), leaf_margin_table)
+        leaf["shape"] = select(leaf_shape_table)
+        leaf["margin"] = select(leaf_margin_table)
         # Table 6c
-        leaf["surface_topside"] = select(random(), leaf_surface_table)
-        leaf["surface_underside"] = select(random(), leaf_surface_table)
+        leaf["surface_topside"] = select(leaf_surface_table)
+        leaf["surface_underside"] = select(leaf_surface_table)
         # Table 6d
-        leaf["venation"] = select(random(), leaf_venation_table)
-        leaf["numbers"] = select(random(), leaf_numbers_table)
-        leaf["color"] = select(random(), color_table)
-        leaf["pattern"] = select(random(), pattern_table)
+        leaf["venation"] = select(leaf_venation_table)
+        leaf["numbers"] = select(leaf_numbers_table)
+        leaf["color"] = select(color_table)
+        leaf["pattern"] = select(pattern_table)
         return leaf
 
     def _generate_reproduction(self):
         # Table 7
-        self.reproduction = select(random(), reproduction_table[self.type])
+        self.reproduction = select(reproduction_table[self.type])
         if "Seeds" not in self.reproduction:
             return
         # Rename this key from type eventually (if you got a better name)
         self.reproduction = {"type": self.reproduction}
         # Table 7a
-        self.reproduction["seed_type"] = select(random(), seeds_table[self.type])
+        self.reproduction["seed_type"] = select(seeds_table[self.type])
 
 if __name__ == "__main__":
     # execute only if run as a script
