@@ -10,16 +10,8 @@ def main():
     flora = Flora()
     flora.generate()
     print("The flora is")
-    '''print("{:>16}: ".format("Type") + flora.type)
-    print("{:>16}: ".format("Habitat") + str(flora.habitat["primary"]))
-    print("{:>16}: ".format("Sub-Habitat") + str(flora.habitat["sub"]))
-    print("{:>16}: ".format("Grouping") + flora.grouping)
-    print("{:>16}: ".format("Size") + flora.size)
-    print("{:>16}: ".format("Main Body") + str(flora.body["main"]))
-    print("{:>16}: ".format("Branches") + str(flora.body["branches"]))
-    print("{:>16}: ".format("Roots") + str(flora.body["roots"]))
-    print("{:>16}: ".format("Leaves / Cap") + str(flora.leaves))'''
-    pprint(vars(flora))
+    print(roll_dice("3d6 + 8"))
+    #pprint(vars(flora))
 
 #----------------------- Globals ----------------------------------------------
 
@@ -69,6 +61,11 @@ def account_for_two(tag, generate):
     else:
         tag = generate(tag["type"])
     return tag
+
+def roll_dice(roll):
+    # Remove all whitespace
+    roll = "".join(roll.split())
+    return roll
 
 #------------------------------ Tables ----------------------------------------
 
