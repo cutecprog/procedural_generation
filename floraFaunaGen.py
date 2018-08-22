@@ -297,15 +297,24 @@ flower_location_table = {"Terminal": 0.30, "Branch Points": 0.50,
         "Random Interval": 0.70, "Regular Interval": 0.90,
         "Stem / Trunk": 0.98, "Roll Twice": 1}
 # Table 7i
-flower_scent_table = {}
+flower_scent_table = {"None": 0.10, "Sweet": 0.60, "Musky": 0.80,
+        "Foul": 0.95, "Other / Specific": 1}
 # Table 7j
-flower_frequency_table = {}
+flower_frequency_table = {"Annual": 0.40, "Poly-Annual": 0.60, 
+        "Perennial": 0.90, "Other": 1}
 # Table 7k
-flower_color_table = {}
-flower_pattern_table = {}
+flower_color_table = {"Red": 0.10, "Orange": 0.20, "Yellow": 0.30, "Green": 0.40,
+        "Blue": 0.50, "Violet": 0.60, "Black": 0.62, "Grey": 0.65,
+        "White": 0.75, "Brown": 0.80, "Silver": 0.85, "Copper": 0.90,
+        "Gold": 0.95, "Roll Twice": 1}
+flower_pattern_table = {"Spotted": 0.08, "Mottled": 0.13, "Patches": 0.20,
+        "Stripes": 0.30, "Solid": 0.50, "Phases": 0.55, "Translucent": 0.60,
+        "Iridescent": 0.65, "Luminescent": 0.70, "Blushed": 0.84,
+        "Mimicry": 0.89, "Night Blooming": 0.92, "Night Closing": 0.95,
+        "Roll Twice": 1}
 # Table 7l
-flower_stamens_table = {}
-flower_pistils_table = {}
+flower_stamens_table = {"0": 0.10, "1-3": 0.30, "4-9": 0.70, "10+": 1}
+flower_pistils_table = {"0": 0.20, "1": 0.40, "2-4": 0.75, "5+": 1}
 # Table 8 (change made: Re-roll twice removed 'Re-roll Twice' keep 'Other')
 diet_table = {"Woody":
         {"Photo/Chemo-synthetic": 0.89, "Predaceous": 0.90, "Decay": 0.95,
