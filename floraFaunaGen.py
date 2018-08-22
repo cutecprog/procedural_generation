@@ -181,12 +181,11 @@ leaf_margin_table = {"Smooth": 0.15, "Sinuate": 0.30, "Undulate": 0.40, "Spiny":
         "Lobate": 0.55, "Crenate": 0.60, "Dentate": 0.70, "Denticulate": 0.75,
         "Serate": 0.85, "Serrulate": 0.90, "Ciliate": 0.95, "Roll Twice": 1}
 # Table 6c
-leaf_surface_table = {}
+leaf_surface_table = {"Smooth": 0.25, "Waxy": 0.40, "Scaly": 0.55, "Hairy": 0.65,
+        "Velvety": 0.80, "Dusty": 0.90, "Sticky": 0.96, "Roll Twice": 1}
 # Table 6d
 # Table 6e
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
-test_table = {"Woody":{"Roll Twice": 1},"Herbaceous":{"Roll Twice": 1},
-        "Algae":{"Roll Twice": 1},"Fungus":{"Roll Twice": 1}}
 
 #----------------------- Classes ----------------------------------------------
 
@@ -294,6 +293,9 @@ class Flora(object):
         # Table 6b
         leaf["shape"] = select(random(), leaf_shape_table)
         leaf["margin"] = select(random(), leaf_margin_table)
+        # Table 6c
+        leaf["surface_topside"] = select(random(), leaf_surface_table)
+        leaf["surface_underside"] = select(random(), leaf_surface_table)
         return leaf
 
 if __name__ == "__main__":
