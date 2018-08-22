@@ -413,6 +413,7 @@ class Flora(object):
     def _generate_leaves(self):
         # Table 6
         self.leaves["type"] = select(leaves_table[self.type])
+        # Table 6a+
         self.leaves = account_for_two(self.leaves, self.__get_random_leaf_of_type)
 
     def __get_random_leaf_of_type(self, type):
@@ -472,11 +473,14 @@ class Flora(object):
     def _generate_edibility(self):
         # Table 10
         self.edibility["type"] = select(edibility_table[self.type], modifier=0.5)
-        self.leaves = account_for_two(self.edibility,
+        # Table 10a+
+        self.edibility = account_for_two(self.edibility,
                 self.__get_random_edible_property_of_type)
     
     def __get_random_edible_property_of_type(self, type):
+        edible_property = {"type": type}
         self.edibility["preparation"] = ""
+        return edible_property
 
 if __name__ == "__main__":
     # execute only if run as a script
