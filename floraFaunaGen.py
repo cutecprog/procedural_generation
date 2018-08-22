@@ -211,7 +211,7 @@ seeds_table = {"Woody":
         "Algae":
         {"Grain": 0.02, "Nut": 0.04, "Fruit": 0.06, "Spore": 0.90, "Other": 1} }
 seeds_table["Fungus"] = seeds_table["Algae"]
-# Table 7b
+# Table 7b (This table is incomplete)
 seed_dispersal_table = {"Grain":
         {"Animal": 0.20, "Wind": 0.40, "Water": 0.60, "Gravity": 0.98, "Other": 1},
         "Nut":
@@ -219,8 +219,25 @@ seed_dispersal_table = {"Grain":
         "Fruit":
         {"Animal": 0.60, "Wind": 0.65, "Water": 0.85, "Gravity": 0.98, "Other": 1},
         "Spore":
-        {"Animal": 0.40, "Wind": 0.83, "Water": 0.90, "Gravity": 0.98, "Other": 1} }
+        {"Animal": 0.40, "Wind": 0.83, "Water": 0.90, "Gravity": 0.98, "Other": 1},
+        "Other": {"Other": 1} # Missing is source doc
+        }
 # Table 7c
+flower_table = {"Grain":
+        {"None": 0.02, "Single": 0.05, "Pairs": 0.10, "Bunches": 0.30,
+        "Compound": 0.50, "Spray": 0.90, "Other": 1},
+        "Nut":
+        {"None": 0.02, "Single": 0.40, "Pairs": 0.60, "Bunches": 0.80,
+        "Compound": 0.90, "Spray": 0.95, "Other": 1},
+        "Fruit":
+        {"None": 0.03, "Single": 0.30, "Pairs": 0.60, "Bunches": 0.70,
+        "Compound": 0.80, "Spray": 0.90, "Other": 1},
+        "Spore":
+        {"None": 0.40, "Single": 0.50, "Pairs": 0.60, "Bunches": 0.70,
+        "Compound": 0.80, "Spray": 0.90, "Other": 1},
+        "Other":
+        {"None": 0.10, "Single": 0.20, "Pairs": 0.30, "Bunches": 0.50,
+        "Compound": 0.70, "Spray": 0.90, "Other": 1} }
 # Table 7d
 # Table 7e
 # Table 7f
@@ -238,7 +255,7 @@ seed_dispersal_table = {"Grain":
 # Table 10a
 # Table 10b
 # Table 10c
-
+#{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 
 #----------------------- Classes ----------------------------------------------
@@ -361,16 +378,17 @@ class Flora(object):
 
     def _generate_reproduction(self):
         # Table 7
-        self.reproduction = select(reproduction_table[self.type])
-        if "Seeds" not in self.reproduction:
+        self.reproduction["type"] = select(reproduction_table[self.type])
+        if "Seeds" not in self.reproduction["type"]:
             return
-        # Rename this key from type eventually (if you got a better name)
-        self.reproduction = {"type": self.reproduction}
         # Table 7a
         self.reproduction["seed_type"] = select(seeds_table[self.type])
         # Table 7b
         self.reproduction["seed_dispersal"] = \
                 select(seed_dispersal_table[self.reproduction["seed_type"]])
+        # Table 7c
+        self.reproduction["flower_type"] = \
+                select(flower_table[self.reproduction["seed_type"]])
 
 if __name__ == "__main__":
     # execute only if run as a script
