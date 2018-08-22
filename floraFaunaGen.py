@@ -529,6 +529,7 @@ class Flora(object):
             self.reproduction["petal_surface_outside"] = \
                     select(petal_surface_table)
         # Table 7h
+        self.reproduction["flower_location"] = select(flower_location_table)
         # Table 7i
         # Table 7j
         # Table 7k
