@@ -141,7 +141,7 @@ body_surface_table = {"Woody":
         {"Smooth": 0.65, "Waxy": 0.70, "Rough": 0.75, "Scaly": 0.82,
         "Flaky": 0.90, "Other": 0.99, "Roll Twice": 1} }
 body_surface_table["Fungus"] = body_surface_table["Algae"]
-# Table 5d
+# Table 5d and 6e
 color_table = {"Red": 0.05, "Orange": 0.10, "Yellow": 0.20, "Green": 0.45,
         "Blue": 0.50, "Violet": 0.55, "Black": 0.60, "Grey": 0.65,
         "White": 0.70, "Brown": 0.80, "Silver": 0.85, "Copper": 0.90,
@@ -188,7 +188,8 @@ leaf_venation_table = {"Arcuate": 0.10, "Cross-Venulate": 0.20,
         "Dichotomous": 0.30, "Longitudinal": 0.45, "Palmate": 0.60,
         "Parallel": 0.70, "Pinnate": 0.80, "Reticulate": 0.90, "None": 0.99,
         "Roll Twice": 1 }
-# Table 6e
+leaf_numbers_table = {"Single": 0.20, "Pairs": 0.40, "Whorls": 0.60,
+        "Clusters": 0.95, "Roll Twice": 1}
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
 
 #----------------------- Classes ----------------------------------------------
@@ -302,6 +303,9 @@ class Flora(object):
         leaf["surface_underside"] = select(random(), leaf_surface_table)
         # Table 6d
         leaf["venation"] = select(random(), leaf_venation_table)
+        leaf["numbers"] = select(random(), leaf_numbers_table)
+        leaf["color"] = select(random(), color_table)
+        leaf["pattern"] = select(random(), pattern_table)
         return leaf
 
 if __name__ == "__main__":
