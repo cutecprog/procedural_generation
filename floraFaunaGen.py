@@ -273,6 +273,8 @@ flower_shape_table = {"Single":
         {"Funnel": 0.15, "Spike": 0.30, "Disc": 0.00, "Cone": 0.60,
         "Bell": 0.75, "Sphere": 0.90, "Complex": 1} }
 # Table 7e
+flower_size_table = \
+        {"Tiny": 0.10, "Small": 0.40, "Average": 0.80, "Large": 0.95, "Huge": 1}
 # Table 7f
 # Table 7g
 # Table 7h
@@ -345,7 +347,6 @@ medicinal_preparation_table = {"Bath": 0.05, "Cold Compress": 0.10,
         "Powder": 0.73, "Rubbed": 0.76, "Syrup": 0.80, "Tincture": 0.85,
         "Vapour / Smoke": 0.89, "Wash": 0.93, "Whole": 0.95, "Other": 0.98,
         "Roll Twice": 1}
-
 
 #{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
@@ -486,6 +487,8 @@ class Flora(object):
         # Table 7d
         self.reproduction["flower_shape"] = select(
                 flower_shape_table[self.reproduction["flower_type"]] )
+        # Table 7e
+        self.reproduction["flower_size"] = select(flower_size_table)
 
     def _generate_sentience(self):
         roll = random() + aura * 0.05
