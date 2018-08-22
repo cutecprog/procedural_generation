@@ -55,6 +55,19 @@ def roll_twice(table, modifier = 0):
         output[1] = select(table, allow_row_twice=False)
     return output
 
+def account_for_two(tag, generate):
+    #self.leaves["type"] = select(leaves_table[self.type])
+    if type(tag["type"]) is list:
+        tag = [{"type": tag["type"][0]}, {"type": tag["type"][1]} ]
+    elif tag["type"] == "None":
+        return
+    if type(tag) is list:
+        tag[0] = generate(tag[0]["type"])
+        tag[1] = generate(tag[1]["type"])
+    else:
+        tag = generate(tag["type"])
+    return tag
+
 #------------------------------ Tables ----------------------------------------
 
 # Table 1
@@ -295,6 +308,10 @@ edibility_table = {"Woody":
         {"Non-Edible": 0.30, "Edible": 0.60, "Nutritious / Tasty": 0.86,
         "Medicinal": 0.99, "Roll Twice": 1} }
 # Table 10a
+edible_preparation_table = {"Edible":
+        {},
+        "Nutritious / Tasty":
+        {} }
 # Table 10b
 # Table 10c
 #{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
@@ -394,17 +411,7 @@ class Flora(object):
     def _generate_leaves(self):
         # Table 6
         self.leaves["type"] = select(leaves_table[self.type])
-        if type(self.leaves["type"]) is list:
-            self.leaves = [{"type": self.leaves["type"][0]}, \
-                    {"type": self.leaves["type"][1]} ]
-        elif self.leaves["type"] == "None":
-            return
-        # Tables 6a+
-        if type(self.leaves) is list:
-            self.leaves[0] = self.__get_random_leaf_of_type(self.leaves[0]["type"])
-            self.leaves[1] = self.__get_random_leaf_of_type(self.leaves[1]["type"])
-        else:
-            self.leaves = self.__get_random_leaf_of_type(self.leaves["type"])
+        self.leaves = account_for_two(self.leaves, self.__get_random_leaf_of_type)
 
     def __get_random_leaf_of_type(self, type):
         leaf = {"type": type}
@@ -461,7 +468,26 @@ class Flora(object):
                 self.sentience = [self.sentience, select(sentience_table, modifier)]
 
     def _generate_edibility(self):
+        # Table 10
         self.edibility["type"] = select(edibility_table[self.type])
+        if type(self.edibility["type"]) is list:
+            self.edibility = [{"type": self.edibility["type"][0]}, \
+                    {"type": self.edibility["type"][1]} ]
+        # Tables 10a+
+        if type(self.edibility) is list:
+            self.edibility[0] = \
+                    self.__get_random_edible_property_of_type(
+                    self.edibility[0]["type"])
+            self.edibility[1] = \
+                    self.__get_random_edible_property_of_type(
+                    self.edibility[1]["type"])
+        else:
+            self.edibility = \
+                    self.__get_random_edible_property_of_type(
+                    self.edibility["type"])
+    
+    def __get_random_edible_property_of_type(self, type):
+        self.edibility["preparation"] = ""
 
 if __name__ == "__main__":
     # execute only if run as a script
