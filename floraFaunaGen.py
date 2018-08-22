@@ -58,7 +58,7 @@ def roll_twice(table):
 #------------------------------ Tables ----------------------------------------
 
 # Table 1
-type_table = {"Woody": 0.0, "Herbaceous": 0.5, "Algae": 0.90, "Fungus": 1}
+type_table = {"Woody": 0.30, "Herbaceous": 0.85, "Algae": 0.90, "Fungus": 1}
 # Table 2
 habitat_table = {"Woody":
         {"Aquatic": 0.05, "Sub-Terrestrial": 0.10, "Terrestrial": 0.99, "Avian": 1},
@@ -158,7 +158,7 @@ leaves_table = {"Woody":
         "Scales": 0.98, "Roll Twice": 0.99, "None": 1},
         "Algae":
         {"Broad": 0.02, "Needles": 0.03, "Compound": 0.10, "Blades": 0.11,
-        "Scales": 0.15, "Roll Twice": 0.99, "None": 1},
+        "Scales": 0.15, "Roll Twice": 0.30, "None": 1},
         "Fungus":
         {"Broad": 0.25, "Needles": 0.50, "Compound": 0.60, "Blades": 0.80,
         "Scales": 0.90, "Roll Twice": 0.95, "None": 1} }
