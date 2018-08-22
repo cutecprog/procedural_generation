@@ -247,19 +247,19 @@ flower_table = {"Grain":
 # Table 7j
 # Table 7k
 # Table 7l
-# Table 8
+# Table 8 (change made: Re-roll twice removed 'Re-roll Twice' keep 'Other')
 diet_table = {"Woody":
         {"Photo/Chemo-synthetic": 0.89, "Predaceous": 0.90, "Decay": 0.95,
-        "Parasitic": 0.98, "Symbiotic": 0.99, "Roll Twice": 1},
+        "Parasitic": 0.98, "Symbiotic": 0.99, "Other": 1},
         "Herbaceous":
         {"Photo/Chemo-synthetic": 0.85, "Predaceous": 0.87, "Decay": 0.93,
-        "Parasitic": 0.96, "Symbiotic": 0.98, "Roll Twice": 1},
+        "Parasitic": 0.96, "Symbiotic": 0.98, "Other": 1},
         "Algae":
         {"Photo/Chemo-synthetic": 0.92, "Predaceous": 0.93, "Decay": 0.94,
-        "Parasitic": 0.95, "Symbiotic": 0.99, "Roll Twice": 1},
+        "Parasitic": 0.95, "Symbiotic": 0.99, "Other": 1},
         "Fungus":
         {"Photo/Chemo-synthetic": 0.05, "Predaceous": 0.08, "Decay": 0.90,
-        "Parasitic": 0.94, "Symbiotic": 0.98, "Roll Twice": 1}
+        "Parasitic": 0.94, "Symbiotic": 0.98, "Other": 1}
         # Change made above to ^^^^ 0.99 to 0.98
         }
 # Table 8a
@@ -276,6 +276,7 @@ tropism_table = {"Woody":
         {"None": 0.30, "Gravity": 0.70, "Light": 0.80, "Heat": 0.90,
         "Touch": 0.96, "Motile": 0.98, "Mobile": 0.99, "Roll Twice": 1} }
 # Table 9
+
 # Table 9a
 # Table 10
 # Table 10a
