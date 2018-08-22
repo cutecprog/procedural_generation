@@ -254,6 +254,24 @@ flower_table = {"Grain":
         {"None": 0.10, "Single": 0.20, "Pairs": 0.30, "Bunches": 0.50,
         "Compound": 0.70, "Spray": 0.90, "Other": 1} }
 # Table 7d
+flower_shape_table = {"Single":
+        {"Funnel": 0.18, "Spike": 0.20, "Disc": 0.40, "Cone": 0.60,
+        "Bell": 0.85, "Sphere": 0.90, "Complex": 1},
+        "Pairs":
+        {"Funnel": 0.20, "Spike": 0.25, "Disc": 0.00, "Cone": 0.45,
+        "Bell": 0.80, "Sphere": 0.90, "Complex": 1},
+        "Bunches":
+        {"Funnel": 0.10, "Spike": 0.30, "Disc": 0.00, "Cone": 0.70,
+        "Bell": 0.90, "Sphere": 0.95, "Complex": 1},
+        "Compound":
+        {"Funnel": 0.03, "Spike": 0.25, "Disc": 0.00, "Cone": 0.70,
+        "Bell": 0.80, "Sphere": 0.95, "Complex": 1},
+        "Spray":
+        {"Funnel": 0.10, "Spike": 0.15, "Disc": 0.00, "Cone": 0.40,
+        "Bell": 0.80, "Sphere": 0.90, "Complex": 1},
+        "Other":
+        {"Funnel": 0.15, "Spike": 0.30, "Disc": 0.00, "Cone": 0.60,
+        "Bell": 0.75, "Sphere": 0.90, "Complex": 1} }
 # Table 7e
 # Table 7f
 # Table 7g
@@ -328,8 +346,10 @@ medicinal_preparation_table = {"Bath": 0.05, "Cold Compress": 0.10,
         "Vapour / Smoke": 0.89, "Wash": 0.93, "Whole": 0.95, "Other": 0.98,
         "Roll Twice": 1}
 
+
 #{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
 #{"Woody":{},"Herbaceous":{},"Algae":{},"Fungus":{} }
+#{"Single":{},"Pairs":{},"Bunches":{},"Compound":{},"Spray":{},"Other":{} }
 
 #----------------------- Classes ----------------------------------------------
 
@@ -463,6 +483,9 @@ class Flora(object):
                 select(flower_table[self.reproduction["seed_type"]])
         if self.reproduction["flower_type"] == "None":
             return
+        # Table 7d
+        self.reproduction["flower_shape"] = select(
+                flower_shape_table[self.reproduction["flower_type"]] )
 
     def _generate_sentience(self):
         roll = random() + aura * 0.05
