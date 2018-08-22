@@ -3,7 +3,7 @@ Credits:
 Tables (v1.1) by Sebastian Romu
 
 """
-from random import random
+from random import random, randint
 from pprint import pprint
 
 def main():
@@ -65,7 +65,17 @@ def account_for_two(tag, generate):
 def roll_dice(roll):
     # Remove all whitespace
     roll = "".join(roll.split())
-    return roll
+    sum = 0
+    for n in roll.split("+"):
+        arg = n.split('d')
+        if len(arg) == 1:
+            sum += int(arg[0])
+        elif len(arg) == 2:
+            number_of_rolls = int(arg[0])
+            die_type = int(arg[1])
+            for i in range(0, number_of_rolls):
+                sum += randint(1, die_type)
+    return sum
 
 #------------------------------ Tables ----------------------------------------
 
