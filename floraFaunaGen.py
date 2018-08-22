@@ -313,7 +313,7 @@ class Flora(object):
     def __get_random_leaf_of_type(self, type):
         leaf = {"type": type}
         # Table 6a
-        if type == "Fungus":
+        if self.type == "Fungus":
             leaf["location"] = "Terminal"
         else:
             leaf["location"] = select(random(), leaf_location_table)
