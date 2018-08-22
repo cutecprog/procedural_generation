@@ -263,6 +263,18 @@ diet_table = {"Woody":
         # Change made above to ^^^^ 0.99 to 0.98
         }
 # Table 8a
+tropism_table = {"Woody":
+        {"None": 0.02, "Gravity": 0.55, "Light": 0.83, "Heat": 0.87,
+        "Touch": 0.97, "Motile": 0.98, "Mobile": 0.99, "Roll Twice": 1},
+        "Herbaceous":
+        {"None": 0.05, "Gravity": 0.40, "Light": 0.82, "Heat": 0.87,
+        "Touch": 0.97, "Motile": 0.98, "Mobile": 0.99, "Roll Twice": 1},
+        "Algae":
+        {"None": 0.20, "Gravity": 0.35, "Light": 0.60, "Heat": 0.85,
+        "Touch": 0.90, "Motile": 0.94, "Mobile": 0.98, "Roll Twice": 1},
+        "Fungus":
+        {"None": 0.30, "Gravity": 0.70, "Light": 0.80, "Heat": 0.90,
+        "Touch": 0.96, "Motile": 0.98, "Mobile": 0.99, "Roll Twice": 1} }
 # Table 9
 # Table 9a
 # Table 10
@@ -304,6 +316,8 @@ class Flora(object):
         self._generate_reproduction()
         # Table 8
         self.diet["type"] = select(diet_table[self.type])
+        # Table 8a
+        self.diet["tropism"] = select(tropism_table[self.type])
 
     def _generate_habitat(self):
         # Table 2
