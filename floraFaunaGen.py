@@ -190,6 +190,18 @@ leaf_venation_table = {"Arcuate": 0.10, "Cross-Venulate": 0.20,
 leaf_numbers_table = {"Single": 0.20, "Pairs": 0.40, "Whorls": 0.60,
         "Clusters": 0.95, "Roll Twice": 1}
 # Table 7
+reproduction_table = {"Woody":
+        {"Seeds": 0.80, "Suckers": 0.92, "Budding / Fragmentation": 0.98,
+        "Other": 0.99, "Roll Twice": 1},
+        "Herbaceous":
+        {"Seeds": 0.63, "Suckers": 0.85, "Budding / Fragmentation": 0.98,
+        "Other": 0.99, "Roll Twice": 1},
+        "Algae":
+        {"Seeds": 0.02, "Suckers": 0.06, "Budding / Fragmentation": 0.90,
+        "Other": 0.99, "Roll Twice": 1},
+        "Fungus":
+        {"Seeds": 0.89, "Suckers": 0.95, "Budding / Fragmentation": 0.98,
+        "Other": 0.99, "Roll Twice": 1} }
 # Table 7a
 # Table 7b
 # Table 7c
@@ -241,6 +253,8 @@ class Flora(object):
         self._generate_body()
         # Table 6*
         self._generate_leaves()
+        # Table 7*
+        self._generate_reproduction()
 
     def _generate_habitat(self):
         # Table 2
@@ -328,6 +342,14 @@ class Flora(object):
         leaf["color"] = select(random(), color_table)
         leaf["pattern"] = select(random(), pattern_table)
         return leaf
+
+    def _generate_reproduction(self):
+        # Table 7
+        self.reproduction = select(random(), reproduction_table[self.type])
+        if "Seeds" not in self.reproduction:
+            return
+        # Rename this key from type eventually (if you got a better name)
+        self.reproduction = {"type": self.reproduction}
 
 if __name__ == "__main__":
     # execute only if run as a script
