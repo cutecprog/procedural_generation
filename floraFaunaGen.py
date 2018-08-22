@@ -276,12 +276,22 @@ flower_shape_table = {"Single":
 flower_size_table = \
         {"Tiny": 0.10, "Small": 0.40, "Average": 0.80, "Large": 0.95, "Huge": 1}
 # Table 7f
+petal_shape_table = {}
+petal_number_table = {}
 # Table 7g
+petal_surface_table = {}
 # Table 7h
+flower_location_table = {}
 # Table 7i
+flower_scent_table = {}
 # Table 7j
+flower_frequency_table = {}
 # Table 7k
+flower_color_table = {}
+flower_pattern_table = {}
 # Table 7l
+flower_stamens_table = {}
+flower_pistils_table = {}
 # Table 8 (change made: Re-roll twice removed 'Re-roll Twice' keep 'Other')
 diet_table = {"Woody":
         {"Photo/Chemo-synthetic": 0.89, "Predaceous": 0.90, "Decay": 0.95,
@@ -489,6 +499,13 @@ class Flora(object):
                 flower_shape_table[self.reproduction["flower_type"]] )
         # Table 7e
         self.reproduction["flower_size"] = select(flower_size_table)
+        # Table 7f
+        # Table 7g
+        # Table 7h
+        # Table 7i
+        # Table 7j
+        # Table 7k
+        # Table 7l
 
     def _generate_sentience(self):
         roll = random() + aura * 0.05
