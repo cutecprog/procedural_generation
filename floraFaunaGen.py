@@ -203,6 +203,13 @@ reproduction_table = {"Woody":
         {"Seeds": 0.89, "Suckers": 0.95, "Budding / Fragmentation": 0.98,
         "Other": 0.99, "Roll Twice": 1} }
 # Table 7a
+seeds_table = {"Woody":
+        {"Grain": 0.05, "Nut": 0.50, "Fruit": 0.94, "Spore": 0.99, "Other": 1},
+        "Herbaceous":
+        {"Grain": 0.40, "Nut": 0.45, "Fruit": 0.80, "Spore": 0.99, "Other": 1},
+        "Algae":
+        {"Grain": 0.02, "Nut": 0.04, "Fruit": 0.06, "Spore": 0.90, "Other": 1} }
+seeds_table["Fungus"] = seeds_table["Algae"]
 # Table 7b
 # Table 7c
 # Table 7d
@@ -350,6 +357,8 @@ class Flora(object):
             return
         # Rename this key from type eventually (if you got a better name)
         self.reproduction = {"type": self.reproduction}
+        # Table 7a
+        self.reproduction["seed_type"] = select(random(), seeds_table[self.type])
 
 if __name__ == "__main__":
     # execute only if run as a script
