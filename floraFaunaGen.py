@@ -10,15 +10,12 @@ def main():
     flora = Flora()
     flora.generate()
     print("The flora is")
-    print(roll_dice("3d6 + 8"))
-    #pprint(vars(flora))
+    pprint(vars(flora))
 
 #----------------------- Globals ----------------------------------------------
 
 gravity = 0     # Planetary Gravity Index
 aura = 0        # Planetary Aura Index
-table_names = ["type", "habitat", "grouping", "size", "body", "leaves", \
-        "reproduction", "diet", "sentience", "edibility"]
 
 #------------------------ Functions -------------------------------------------
 
@@ -63,6 +60,8 @@ def account_for_two(tag, generate):
     return tag
 
 def roll_dice(roll):
+    if roll == "None":
+        return 0
     # Remove all whitespace
     roll = "".join(roll.split())
     sum = 0
@@ -199,7 +198,8 @@ leaf_shape_table = {"Acicular": 0.03, "Subulate": 0.06, "Lanceolate": 0.10,
         "Poly-Foliate": 0.87, "Palmate": 0.92, "Pedate": 0.96, "Digitate": 0.98,
         "Roll Twice": 1}
 
-leaf_margin_table = {"Smooth": 0.15, "Sinuate": 0.30, "Undulate": 0.40, "Spiny": 0.45,
+leaf_margin_table = {"Smooth": 0.15, "Sinuate": 0.30, "Undulate": 0.40,
+        "Spiny": 0.45,
         "Lobate": 0.55, "Crenate": 0.60, "Dentate": 0.70, "Denticulate": 0.75,
         "Serate": 0.85, "Serrulate": 0.90, "Ciliate": 0.95, "Roll Twice": 1}
 # Table 6c
@@ -283,8 +283,11 @@ flower_shape_table = {"Single":
 flower_size_table = \
         {"Tiny": 0.10, "Small": 0.40, "Average": 0.80, "Large": 0.95, "Huge": 1}
 # Table 7f
-petal_shape_table = {}
-petal_number_table = {}
+petal_shape_table = {"Round": 0.10, "Curly": 0.25, "Wavy": 0.40,
+        "Toothed": 0.50, "Oval": 0.65, "Blade": 0.80, "Thread": 0.85,
+        "Feathery": 0.90, "Roll Twice": 1}
+petal_number_table = \
+        {"None": 0.10, "1d6": 0.30, "3d4": 0.60, "4d6": 0.90,"5d20": 1}
 # Table 7g
 petal_surface_table = {}
 # Table 7h
