@@ -212,6 +212,14 @@ seeds_table = {"Woody":
         {"Grain": 0.02, "Nut": 0.04, "Fruit": 0.06, "Spore": 0.90, "Other": 1} }
 seeds_table["Fungus"] = seeds_table["Algae"]
 # Table 7b
+seed_dispersal_table = {"Grain":
+        {"Animal": 0.20, "Wind": 0.40, "Water": 0.60, "Gravity": 0.98, "Other": 1},
+        "Nut":
+        {"Animal": 0.45, "Wind": 0.53, "Water": 0.60, "Gravity": 0.98, "Other": 1},
+        "Fruit":
+        {"Animal": 0.60, "Wind": 0.65, "Water": 0.85, "Gravity": 0.98, "Other": 1},
+        "Spore":
+        {"Animal": 0.40, "Wind": 0.83, "Water": 0.90, "Gravity": 0.98, "Other": 1} }
 # Table 7c
 # Table 7d
 # Table 7e
@@ -360,6 +368,9 @@ class Flora(object):
         self.reproduction = {"type": self.reproduction}
         # Table 7a
         self.reproduction["seed_type"] = select(seeds_table[self.type])
+        # Table 7b
+        self.reproduction["seed_dispersal"] = \
+                select(seed_dispersal_table[self.reproduction["seed_type"]])
 
 if __name__ == "__main__":
     # execute only if run as a script
