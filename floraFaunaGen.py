@@ -293,7 +293,9 @@ petal_surface_table = {"Smooth": 0.15, "Waxy": 0.30, "Veined": 0.40,
         "Scaly": 0.45, "Hairy": 0.60, "Velvety": 0.80, "Dusty": 0.90,
         "Sticky": 0.96, "Twice Roll": 1}
 # Table 7h
-flower_location_table = {}
+flower_location_table = {"Terminal": 0.30, "Branch Points": 0.50,
+        "Random Interval": 0.70, "Regular Interval": 0.90,
+        "Stem / Trunk": 0.98, "Roll Twice": 1}
 # Table 7i
 flower_scent_table = {}
 # Table 7j
