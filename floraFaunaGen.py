@@ -311,9 +311,11 @@ edibility_table = {"Woody":
         "Medicinal": 0.99, "Roll Twice": 1} }
 # Table 10a
 edible_preparation_table = {"Edible":
-        {},
+        {"Raw": 0.15, "Roasted": 0.30, "Boiled": 0.50, "Ground": 0.60,
+        "Steeped": 0.75, "Blanched": 0.85, "Dried": 1},
         "Nutritious / Tasty":
-        {} }
+        {"Raw": 0.30, "Roasted": 0.45, "Boiled": 0.55, "Ground": 0.65,
+        "Steeped": 0.75, "Blanched": 0.80, "Dried": 1} }
 # Table 10b
 # Table 10c
 #{"Grain":{},"Nut":{},"Fruit":{},"Spore":{},"Other":{} }
@@ -472,15 +474,21 @@ class Flora(object):
 
     def _generate_edibility(self):
         # Table 10
-        self.edibility["type"] = select(edibility_table[self.type], modifier=0.5)
+        self.edibility["type"] = select(edibility_table[self.type])
         # Table 10a+
         self.edibility = account_for_two(self.edibility,
-                self.__get_random_edible_property_of_type)
+                self.__get_random_use_of_type)
     
-    def __get_random_edible_property_of_type(self, type):
-        edible_property = {"type": type}
-        self.edibility["preparation"] = ""
-        return edible_property
+    def __get_random_use_of_type(self, type):
+        use = {"type": type}
+        if type == "Edible" or type == "Nutritious / Tasty":
+            use["preparation"] = \
+                    select(edible_preparation_table[type])
+        if type == "Medicinal":
+            use["property"] = ""
+            use["preparation"] = ""
+            
+        return use
 
 if __name__ == "__main__":
     # execute only if run as a script
