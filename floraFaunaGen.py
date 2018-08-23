@@ -4,7 +4,6 @@ Random Flora Tables v1.1 by Sebastian Romu
 
 """
 from random import random, randint
-from pprint import pprint
 from flora_tables import *
 
 def main():
@@ -281,4 +280,5 @@ class Flora(object):
 
 if __name__ == "__main__":
     # execute only if run as a script
+    from pprint import pprint
     main()
