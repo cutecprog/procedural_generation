@@ -259,7 +259,7 @@ class Flora(object):
 
     def _generate_edibility(self):
         # Table 10
-        self.edibility["type"] = select(edibility_table[self.type], 0.5)
+        self.edibility["type"] = select(edibility_table[self.type])
         # Table 10a+
         self.edibility = account_for_two(self.edibility,
                 self.__get_random_use_of_type)
