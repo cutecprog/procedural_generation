@@ -242,7 +242,7 @@ class Flora(object):
 
     def _generate_sentience(self):
         # Table 9
-        roll = random() + aura * 0.05
+        roll = random() + 0.05 * aura
         if self.diet["tropism"] == "Motile":
             roll += 0.10
         elif self.diet["tropism"] == "Mobile":
