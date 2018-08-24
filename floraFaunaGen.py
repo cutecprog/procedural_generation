@@ -117,7 +117,8 @@ class Flora(object):
 
     def _generate_habitat(self):
         # Table 2
-        self.habitat["primary"] = select(habitat_table[self.type], -0.05 * gravity)
+        self.habitat["primary"] = \
+                select(habitat_table[self.type], -0.05 * gravity)
         # Table 2a, 2b
         self.habitat["sub"] = {}
         if self.habitat["primary"] == "Aquatic":
