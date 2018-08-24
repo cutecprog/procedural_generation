@@ -33,7 +33,7 @@ def randharm():
 
 def randrange():
         range_tag = ["intimate", "hand", "close", "far"][randint(0,3)]
-        if range_tag == "far" and random() <= 0.70:
+        if range_tag == "close" and random() <= 0.70:
             tags.remove("reload")
             return "far\nreload"
         return range_tag
