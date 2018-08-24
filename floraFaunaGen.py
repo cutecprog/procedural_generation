@@ -241,6 +241,7 @@ class Flora(object):
         self.reproduction["flower_pistils"] = select(flower_pistils_table)
 
     def _generate_sentience(self):
+        # Table 9
         roll = random() + aura * 0.05
         if self.diet["tropism"] == "Motile":
             roll += 0.10
@@ -248,15 +249,16 @@ class Flora(object):
             roll += 0.20
         if roll <= sentience_chance[self.diet["type"]]:
             self.sentience = "Non-Sentient"
-        else:
-            modifier = 0.05 * aura
-            if self.diet["type"] == "Symbiotic":
-                modifier += 0.05
-            elif self.diet["type"] == "Predaceous":
-                modifier += 0.10
-            self.sentience = select(sentience_table, modifier)
-            if self.sentience == "Hive":
-                self.sentience = [self.sentience, select(sentience_table, modifier)]
+            return
+        # Table 9a
+        modifier = 0.05 * aura
+        if self.diet["type"] == "Symbiotic":
+            modifier += 0.05
+        elif self.diet["type"] == "Predaceous":
+            modifier += 0.10
+        self.sentience = select(sentience_table, modifier)
+        if self.sentience == "Hive":
+            self.sentience = [self.sentience, select(sentience_table, modifier)]
 
     def _generate_edibility(self):
         # Table 10
