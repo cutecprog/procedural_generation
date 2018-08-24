@@ -32,10 +32,10 @@ def randharm():
         return "harm " + str(randint(1,3))
 
 def randrange():
-        return ["hand", "close", "far"][randint(0,2)]
+        return ["intimate", "hand", "close", "far"][randint(0,2)]
 
 tags = ["automatic", "area", "balanced", "fire", "healing", "heavy", "holy", \
-                "ignore-armour", "innocuous", "intimate", "loud", \
+                "ignore-armour", "innocuous", "loud", \
                 "many", "[a material]", "messy", "quick", "reload", "slow", \
                 "small", "unreliable", "useful", "valuable", "volatile"]
 
