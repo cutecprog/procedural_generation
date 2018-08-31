@@ -1,6 +1,7 @@
 """
 Credits:
 Random Flora Tables v1.1 by Sebastian Romu
+https://entorais.wordpress.com/2016/08/02/random-plants/
 
 """
 # Table 1
